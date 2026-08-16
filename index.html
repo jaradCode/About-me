@@ -4,10 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>My Story</title>
+<title>Ntsikelelo — My Story</title>
 
 <style>
-
 /* =========================================================
    RESET
 ========================================================= */
@@ -31,7 +30,7 @@ body {
 
 
 /* =========================================================
-   CUSTOM SCROLLBAR
+   SCROLLBAR
 ========================================================= */
 
 ::-webkit-scrollbar {
@@ -43,12 +42,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #4c4945;
+    background: #55514c;
 }
 
 
 /* =========================================================
-   FILM GRAIN
+   GRAIN
 ========================================================= */
 
 .grain {
@@ -58,7 +57,7 @@ body {
     height: 200%;
     pointer-events: none;
     z-index: 9999;
-    opacity: .055;
+    opacity: .045;
 
     background-image:
         url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
@@ -67,26 +66,11 @@ body {
 }
 
 @keyframes grainMove {
-
-    0% {
-        transform: translate(0,0);
-    }
-
-    25% {
-        transform: translate(2%,-2%);
-    }
-
-    50% {
-        transform: translate(-2%,2%);
-    }
-
-    75% {
-        transform: translate(2%,2%);
-    }
-
-    100% {
-        transform: translate(-2%,-2%);
-    }
+    0%   { transform: translate(0,0); }
+    25%  { transform: translate(2%,-2%); }
+    50%  { transform: translate(-2%,2%); }
+    75%  { transform: translate(2%,2%); }
+    100% { transform: translate(-2%,-2%); }
 }
 
 
@@ -104,7 +88,7 @@ body {
         radial-gradient(
             ellipse at center,
             transparent 45%,
-            rgba(0,0,0,.5) 100%
+            rgba(0,0,0,.52) 100%
         );
 }
 
@@ -114,15 +98,12 @@ body {
 ========================================================= */
 
 .nav {
-
     position: fixed;
-
     top: 0;
     left: 0;
-
     width: 100%;
 
-    padding: 28px 45px;
+    padding: 27px 45px;
 
     display: flex;
     justify-content: space-between;
@@ -131,44 +112,29 @@ body {
     z-index: 500;
 
     mix-blend-mode: difference;
-
 }
 
 .nav-name {
-
     color: white;
-
-    font-size: 15px;
-
+    font-size: 16px;
     font-style: italic;
-
-    letter-spacing: .5px;
-
 }
 
 .nav-right {
-
     color: white;
-
     font-family: Arial, sans-serif;
-
     font-size: 8px;
-
     letter-spacing: 3px;
-
     opacity: .7;
-
 }
 
 
 /* =========================================================
-   SIDE CHAPTER INDICATOR
+   CHAPTER DOTS
 ========================================================= */
 
 .chapter-indicator {
-
     position: fixed;
-
     left: 35px;
     top: 50%;
 
@@ -177,15 +143,11 @@ body {
     z-index: 400;
 
     display: flex;
-
     flex-direction: column;
-
-    gap: 12px;
-
+    gap: 13px;
 }
 
 .chapter-dot {
-
     width: 4px;
     height: 4px;
 
@@ -194,38 +156,25 @@ body {
     background: rgba(255,255,255,.25);
 
     transition: .5s;
-
 }
 
 .chapter-dot.active {
-
     background: white;
-
     transform: scale(1.8);
-
 }
 
 
 /* =========================================================
-   GENERAL CHAPTER
+   GENERAL
 ========================================================= */
 
 .chapter {
-
-    min-height: 100vh;
-
     width: 100%;
+    min-height: 100vh;
 
     position: relative;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
     overflow: hidden;
-
 }
 
 
@@ -234,293 +183,487 @@ body {
 ========================================================= */
 
 .hero {
-
     min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     text-align: center;
 
     background:
-
         radial-gradient(
             circle at center,
             #302d29 0%,
             #171614 35%,
             #11100f 75%
         );
-
 }
 
 .hero-content {
-
     position: relative;
-
     z-index: 5;
-
     width: 90%;
-
 }
 
 .hero-eyebrow {
-
     font-family: Arial, sans-serif;
-
     font-size: 8px;
-
     letter-spacing: 6px;
-
-    text-transform: uppercase;
-
     color: #aaa49c;
-
     margin-bottom: 40px;
 
     opacity: 0;
-
     animation: fadeUp 1.5s .4s forwards;
-
 }
 
 .hero-title {
-
     font-size: clamp(75px, 15vw, 210px);
-
     font-weight: normal;
-
     font-style: italic;
-
     line-height: .78;
-
     letter-spacing: -9px;
-
-    color: #eeeae4;
 
     opacity: 0;
 
-    animation: heroTitle 2s .7s cubic-bezier(.2,.8,.2,1) forwards;
-
+    animation:
+        heroTitle 2s .7s cubic-bezier(.2,.8,.2,1) forwards;
 }
 
 .hero-title span {
-
     display: block;
-
 }
 
 .hero-title span:last-child {
-
     margin-left: 10vw;
-
 }
 
 .hero-bottom {
-
     position: absolute;
-
     bottom: 40px;
-
     left: 50%;
 
     transform: translateX(-50%);
 
     font-family: Arial, sans-serif;
-
     font-size: 7px;
-
     letter-spacing: 4px;
 
     opacity: 0;
-
     animation: fadeUp 1.5s 1.4s forwards;
-
 }
 
 .scroll-line {
-
     position: absolute;
-
     bottom: 0;
-
     left: 50%;
 
     width: 1px;
-
     height: 30px;
 
     background: rgba(255,255,255,.4);
-
 }
 
 
 /* =========================================================
-   EMPTY CHAPTERS
+   DOCUMENTARY SECTIONS
 ========================================================= */
 
-.empty-chapter {
+.documentary-section {
+    min-height: 100vh;
+    padding: 150px 8%;
 
     background: #11100f;
 
-    padding: 100px 9%;
-
+    display: flex;
+    align-items: center;
 }
 
-.empty-chapter:nth-child(even) {
-
+.documentary-section:nth-of-type(even) {
     background: #151412;
+}
 
+.section-inner {
+    width: 100%;
+    max-width: 1250px;
+    margin: auto;
 }
 
 
-/* giant background chapter number */
+/* =========================================================
+   SECTION HEADER
+========================================================= */
 
-.chapter-number {
+.section-header {
+    margin-bottom: 70px;
+}
 
-    position: absolute;
+.section-number {
+    font-family: Arial, sans-serif;
+    font-size: 8px;
+    letter-spacing: 5px;
+    color: #77736d;
 
-    left: -30px;
+    margin-bottom: 25px;
+}
 
-    bottom: -80px;
-
-    font-family: Georgia, "Times New Roman", serif;
-
-    font-size: min(45vw, 600px);
-
-    line-height: .7;
-
+.section-title {
+    font-size: clamp(58px, 10vw, 135px);
+    font-weight: normal;
     font-style: italic;
-
-    color: rgba(255,255,255,.025);
-
-    user-select: none;
-
+    line-height: .82;
+    letter-spacing: -7px;
 }
 
 
-/* title */
+/* =========================================================
+   INFORMATION CONTAINERS
+========================================================= */
 
-.chapter-content {
+.info-grid {
+    display: grid;
 
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+/* Large container */
+
+.info-card {
     position: relative;
 
-    z-index: 5;
+    padding: 35px;
 
-    width: 100%;
+    min-height: 240px;
 
+    border: 1px solid rgba(255,255,255,.10);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.012)
+        );
+
+    transition:
+        transform .6s cubic-bezier(.2,.8,.2,1),
+        border-color .4s ease,
+        background .4s ease;
 }
 
-.chapter-top {
+.info-card:hover {
+    transform: translateY(-5px);
 
+    border-color: rgba(255,255,255,.25);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.018)
+        );
+}
+
+
+/* Full width card */
+
+.info-card.full {
+    grid-column: 1 / -1;
+}
+
+
+/* Card number */
+
+.card-number {
     font-family: Arial, sans-serif;
 
     font-size: 8px;
 
-    letter-spacing: 5px;
+    letter-spacing: 3px;
 
     color: #77736d;
 
     margin-bottom: 35px;
-
 }
 
-.chapter-title {
 
-    font-size: clamp(60px, 11vw, 150px);
+/* Card heading */
+
+.card-title {
+    font-size: 31px;
 
     font-weight: normal;
 
     font-style: italic;
 
-    letter-spacing: -7px;
+    line-height: 1;
 
-    line-height: .8;
+    margin-bottom: 22px;
+}
 
-    color: #eeeae4;
 
+/* Card text */
+
+.card-text {
+    max-width: 900px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 17px;
+
+    line-height: 1.65;
+
+    color: #c7c1b9;
 }
 
 
 /* =========================================================
-   SPECIAL CHAPTER TRANSITIONS
+   TIMELINE
 ========================================================= */
 
-.chapter::before {
+.timeline {
+    position: relative;
 
-    content: "";
+    display: flex;
+    flex-direction: column;
 
-    position: absolute;
-
-    width: 70vw;
-
-    height: 70vw;
-
-    max-width: 800px;
-    max-height: 800px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,255,255,.025);
-
-    pointer-events: none;
-
+    gap: 20px;
 }
 
-.chapter:nth-child(3)::before {
+.timeline-card {
+    position: relative;
 
-    transform: translate(30%, 20%);
+    display: grid;
 
+    grid-template-columns: 130px 1fr;
+
+    gap: 35px;
+
+    padding: 30px;
+
+    border-top: 1px solid rgba(255,255,255,.12);
+
+    transition: .5s;
 }
 
-.chapter:nth-child(4)::before {
-
-    transform: translate(-30%, -20%);
-
+.timeline-card:last-child {
+    border-bottom: 1px solid rgba(255,255,255,.12);
 }
 
-.chapter:nth-child(5)::before {
-
-    transform: translate(25%, -25%);
-
+.timeline-card:hover {
+    padding-left: 40px;
 }
 
-.chapter:nth-child(6)::before {
+.timeline-year {
+    font-family: Arial, sans-serif;
 
-    transform: translate(-25%, 25%);
+    font-size: 10px;
 
+    letter-spacing: 3px;
+
+    color: #8d8881;
+}
+
+.timeline-title {
+    font-size: 28px;
+
+    font-style: italic;
+
+    font-weight: normal;
+
+    margin-bottom: 12px;
+}
+
+.timeline-text {
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    color: #bdb7af;
 }
 
 
 /* =========================================================
-   FINAL CHAPTER
+   PROJECT CONTAINERS
+========================================================= */
+
+.project-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 25px;
+}
+
+.project-card {
+    min-height: 390px;
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    background: #181715;
+
+    overflow: hidden;
+
+    transition: .6s;
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(255,255,255,.25);
+}
+
+.project-visual {
+    height: 220px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle,
+            #35312c,
+            #1a1917
+        );
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 4px;
+
+    color: #77736d;
+}
+
+.project-info {
+    padding: 28px;
+}
+
+.project-name {
+    font-size: 31px;
+
+    font-style: italic;
+
+    font-weight: normal;
+
+    margin-bottom: 12px;
+}
+
+.project-description {
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    color: #aaa49c;
+}
+
+
+/* =========================================================
+   IDEAS
+========================================================= */
+
+.idea-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.idea-card {
+    min-height: 280px;
+
+    padding: 30px;
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    transition: .5s;
+}
+
+.idea-card:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(255,255,255,.25);
+}
+
+.idea-number {
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    color: #77736d;
+}
+
+.idea-title {
+    font-size: 30px;
+
+    font-style: italic;
+
+    font-weight: normal;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   FUTURE
 ========================================================= */
 
 .future {
-
     min-height: 120vh;
 
-    background:
+    display: flex;
 
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background:
         radial-gradient(
             circle at 50% 45%,
             #36312c,
             #171614 35%,
             #11100f 75%
         );
-
-    text-align: center;
-
 }
 
-.future .chapter-content {
+.future-content {
+    width: 90%;
+}
 
-    display: flex;
+.future-small {
+    font-family: Arial, sans-serif;
 
-    flex-direction: column;
+    font-size: 8px;
 
-    align-items: center;
+    letter-spacing: 5px;
 
+    color: #88827b;
+
+    margin-bottom: 45px;
 }
 
 .future-title {
-
     font-size: clamp(75px, 15vw, 200px);
 
     font-weight: normal;
@@ -530,21 +673,6 @@ body {
     line-height: .75;
 
     letter-spacing: -10px;
-
-}
-
-.future-small {
-
-    font-family: Arial, sans-serif;
-
-    font-size: 7px;
-
-    letter-spacing: 5px;
-
-    color: #88827b;
-
-    margin-bottom: 40px;
-
 }
 
 
@@ -553,14 +681,13 @@ body {
 ========================================================= */
 
 footer {
-
-    height: 80px;
+    height: 90px;
 
     display: flex;
 
-    justify-content: center;
-
     align-items: center;
+
+    justify-content: center;
 
     background: #11100f;
 
@@ -571,7 +698,6 @@ footer {
     font-size: 7px;
 
     letter-spacing: 4px;
-
 }
 
 
@@ -582,19 +708,13 @@ footer {
 @keyframes fadeUp {
 
     from {
-
         opacity: 0;
-
         transform: translateY(20px);
-
     }
 
     to {
-
         opacity: 1;
-
         transform: translateY(0);
-
     }
 
 }
@@ -602,23 +722,15 @@ footer {
 @keyframes heroTitle {
 
     from {
-
         opacity: 0;
-
         transform: translateY(50px) scale(.97);
-
         filter: blur(10px);
-
     }
 
     to {
-
         opacity: 1;
-
         transform: translateY(0) scale(1);
-
         filter: blur(0);
-
     }
 
 }
@@ -628,72 +740,80 @@ footer {
    MOBILE
 ========================================================= */
 
-@media(max-width: 700px) {
+@media(max-width: 750px) {
 
     .nav {
-
-        padding: 22px 22px;
-
+        padding: 22px;
     }
 
     .nav-right {
-
         display: none;
-
     }
 
     .chapter-indicator {
-
         display: none;
-
     }
 
     .hero-title {
-
         font-size: 70px;
-
         letter-spacing: -5px;
-
     }
 
     .hero-title span:last-child {
-
         margin-left: 15vw;
-
     }
 
-    .chapter {
-
-        min-height: 90vh;
-
+    .documentary-section {
+        padding: 110px 6%;
     }
 
-    .empty-chapter {
-
-        padding: 80px 7%;
-
+    .section-header {
+        margin-bottom: 45px;
     }
 
-    .chapter-title {
-
+    .section-title {
         font-size: 65px;
-
         letter-spacing: -5px;
-
     }
 
-    .chapter-number {
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
 
-        font-size: 100vw;
+    .info-card.full {
+        grid-column: auto;
+    }
 
+    .info-card {
+        padding: 27px;
+        min-height: 0;
+    }
+
+    .card-title {
+        font-size: 27px;
+    }
+
+    .card-text {
+        font-size: 16px;
+    }
+
+    .timeline-card {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 25px 0;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .idea-grid {
+        grid-template-columns: 1fr;
     }
 
     .future-title {
-
         font-size: 75px;
-
         letter-spacing: -5px;
-
     }
 
 }
@@ -706,31 +826,26 @@ footer {
 @media(prefers-reduced-motion: reduce) {
 
     * {
-
         animation-duration: .01ms !important;
-
         animation-iteration-count: 1 !important;
-
         scroll-behavior: auto !important;
-
     }
 
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- FILM EFFECTS -->
+<!-- =====================================================
+     EFFECTS
+===================================================== -->
 
 <div class="grain"></div>
-
 <div class="vignette"></div>
-
 
 
 <!-- =====================================================
@@ -740,15 +855,14 @@ footer {
 <nav class="nav">
 
     <div class="nav-name">
-        my story
+        Ntsikelelo
     </div>
 
     <div class="nav-right">
-        A DOCUMENTARY
+        MY DOCUMENTARY
     </div>
 
 </nav>
-
 
 
 <!-- =====================================================
@@ -758,25 +872,15 @@ footer {
 <div class="chapter-indicator">
 
     <div class="chapter-dot active"></div>
-
     <div class="chapter-dot"></div>
-
     <div class="chapter-dot"></div>
-
     <div class="chapter-dot"></div>
-
     <div class="chapter-dot"></div>
-
     <div class="chapter-dot"></div>
-
     <div class="chapter-dot"></div>
-
-    <div class="chapter-dot"></div>
-
     <div class="chapter-dot"></div>
 
 </div>
-
 
 
 <!-- =====================================================
@@ -788,19 +892,17 @@ footer {
     <div class="hero-content">
 
         <div class="hero-eyebrow">
-            MY STORY
+            MY DOCUMENTARY
         </div>
 
         <h1 class="hero-title">
 
             <span>this</span>
-
             <span>is me.</span>
 
         </h1>
 
     </div>
-
 
     <div class="hero-bottom">
         SCROLL TO BEGIN
@@ -811,190 +913,871 @@ footer {
 </section>
 
 
-
 <!-- =====================================================
-     MY STORY
+     MY BEGINNING
 ===================================================== -->
 
-<section class="chapter empty-chapter" id="story">
+<section class="documentary-section" id="beginning">
 
-    <div class="chapter-number">
-        01
-    </div>
+    <div class="section-inner">
 
-    <div class="chapter-content">
+        <div class="section-header">
 
-        <div class="chapter-top">
-            CHAPTER 01
+            <div class="section-number">
+                CHAPTER 01
+            </div>
+
+            <h2 class="section-title">
+                my<br>
+                beginning
+            </h2>
+
         </div>
 
-        <h2 class="chapter-title">
-            my story
-        </h2>
+
+        <div class="info-grid">
+
+
+            <div class="info-card full">
+
+                <div class="card-number">
+                    01 — WHERE IT STARTED
+                </div>
+
+                <div class="card-title">
+                    This is where I begin.
+                </div>
+
+                <div class="card-text">
+
+                    My name is Ntsikelelo, and I come from Port St Johns
+                    in the Eastern Cape. I'm writing this on Saturday,
+                    16 August 2026, at 17:31, at a moment when I suddenly
+                    had the idea to create this documentary for myself —
+                    a place to record where I come from, where I'm going,
+                    and what I want to become.
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="card-number">
+                    02 — WHO I AM
+                </div>
+
+                <div class="card-title">
+                    Curious by nature.
+                </div>
+
+                <div class="card-text">
+
+                    I'm a curious person who loves reading, learning new
+                    things, and moving differently from other people.
+                    I wouldn't call myself a genius; I'm a hard worker
+                    who developed a real love for learning and discovering
+                    things beyond what I already know.
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="card-number">
+                    03 — TODAY
+                </div>
+
+                <div class="card-title">
+                    Still becoming.
+                </div>
+
+                <div class="card-text">
+
+                    I'm currently a first-year B.Com Accounting student
+                    at the University of Fort Hare. I used to be quite
+                    disorganised and lost, but now I feel different.
+                    I want to keep learning, building, and becoming
+                    someone different.
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card full">
+
+                <div class="card-number">
+                    04 — WHERE I'M GOING
+                </div>
+
+                <div class="card-title">
+                    I want to build.
+                </div>
+
+                <div class="card-text">
+
+                    Around June 2026, I discovered how much I enjoy
+                    Computer Science, coding, and technology. I want to
+                    continue with Accounting while learning those things
+                    on the side. Eventually, I want to own businesses
+                    and become a developer.
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
 </section>
 
+
+<!-- =====================================================
+     MY STORY
+===================================================== -->
+
+<section class="documentary-section" id="story">
+
+    <div class="section-inner">
+
+        <div class="section-header">
+
+            <div class="section-number">
+                CHAPTER 02
+            </div>
+
+            <h2 class="section-title">
+                my<br>
+                story
+            </h2>
+
+        </div>
+
+
+        <div class="info-grid">
+
+
+            <div class="info-card full">
+
+                <div class="card-number">
+                    01 — HOME
+                </div>
+
+                <div class="card-title">
+                    Port St Johns.
+                </div>
+
+                <div class="card-text">
+
+                    Growing up in Port St Johns was not a bad experience
+                    for me. There are schools, clinics, shops, churches,
+                    and the basic things that make a community a home.
+                    I had a good childhood, and although my family never
+                    had much financially, my parents always made sure that
+                    my siblings and I had food, clothes, education, and
+                    the things we needed.
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="card-number">
+                    02 — FAMILY
+                </div>
+
+                <div class="card-title">
+                    We never had much.
+                </div>
+
+                <div class="card-text">
+
+                    My mother used to clean at a local church and earned
+                    around R1,000 a month. My father worked as a security
+                    guard at the school I attended and earned around
+                    R1,500. They worked in different years. Today,
+                    neither of them is working, and my family still
+                    depends on the SASSA grant.
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="card-number">
+                    03 — CHURCH
+                </div>
+
+                <div class="card-title">
+                    Part of my childhood.
+                </div>
+
+                <div class="card-text">
+
+                    My family loved church. We used to go almost every
+                    day, even when we didn't feel like going. Church was
+                    simply part of our lives, and growing up with it
+                    became one of the things that shaped me.
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card full">
+
+                <div class="card-number">
+                    04 — LESSONS
+                </div>
+
+                <div class="card-title">
+                    Mistakes taught me.
+                </div>
+
+                <div class="card-text">
+
+                    I've made many mistakes, but I believe the most
+                    important thing is learning from them. I've also
+                    watched how certain choices can negatively affect
+                    people's lives, and those experiences have helped me
+                    decide what kind of person I don't want to become.
+                    My past wasn't perfect, but it taught me a lot.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 
 <!-- =====================================================
      MY JOURNEY
 ===================================================== -->
 
-<section class="chapter empty-chapter" id="journey">
+<section class="documentary-section" id="journey">
 
-    <div class="chapter-number">
-        02
-    </div>
+    <div class="section-inner">
 
-    <div class="chapter-content">
+        <div class="section-header">
 
-        <div class="chapter-top">
-            CHAPTER 02
+            <div class="section-number">
+                CHAPTER 03
+            </div>
+
+            <h2 class="section-title">
+                my<br>
+                journey
+            </h2>
+
         </div>
 
-        <h2 class="chapter-title">
-            my journey
-        </h2>
+
+        <div class="timeline">
+
+
+            <div class="timeline-card">
+
+                <div class="timeline-year">
+                    2022
+                </div>
+
+                <div>
+
+                    <div class="timeline-title">
+                        The year I failed Grade 10.
+                    </div>
+
+                    <div class="timeline-text">
+
+                        Failing Grade 10 made me realise that I needed
+                        to become better and take my future more
+                        seriously. It became one of the moments that
+                        pushed me to start changing.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-card">
+
+                <div class="timeline-year">
+                    2022 — 2025
+                </div>
+
+                <div>
+
+                    <div class="timeline-title">
+                        Learning to learn.
+                    </div>
+
+                    <div class="timeline-text">
+
+                        Over the following years, I became increasingly
+                        interested in reading, knowledge, and the world
+                        beyond what I already knew. I slowly developed
+                        a real love for learning.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-card">
+
+                <div class="timeline-year">
+                    2026
+                </div>
+
+                <div>
+
+                    <div class="timeline-title">
+                        University.
+                    </div>
+
+                    <div class="timeline-text">
+
+                        I applied to university late and chose B.Com
+                        Accounting at the University of Fort Hare because
+                        it was the best course available to me at the
+                        time. I am now a first-year student.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-card">
+
+                <div class="timeline-year">
+                    JUNE 2026
+                </div>
+
+                <div>
+
+                    <div class="timeline-title">
+                        Discovering technology.
+                    </div>
+
+                    <div class="timeline-text">
+
+                        Around June 2026, I discovered how much I enjoy
+                        Computer Science, coding, and technology. I
+                        decided that I would continue learning it on
+                        the side while continuing my degree.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-card">
+
+                <div class="timeline-year">
+                    NOW
+                </div>
+
+                <div>
+
+                    <div class="timeline-title">
+                        Still moving.
+                    </div>
+
+                    <div class="timeline-text">
+
+                        I'm proud that I made it this far. I'm learning,
+                        building, studying, and trying to understand
+                        exactly what I want to become.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
 </section>
-
 
 
 <!-- =====================================================
      THINGS I'VE BUILT
 ===================================================== -->
 
-<section class="chapter empty-chapter" id="built">
+<section class="documentary-section" id="built">
 
-    <div class="chapter-number">
-        03
-    </div>
+    <div class="section-inner">
 
-    <div class="chapter-content">
+        <div class="section-header">
 
-        <div class="chapter-top">
-            CHAPTER 03
+            <div class="section-number">
+                CHAPTER 04
+            </div>
+
+            <h2 class="section-title">
+                things<br>
+                i've built
+            </h2>
+
         </div>
 
-        <h2 class="chapter-title">
-            things<br>
-            i've built
-        </h2>
+
+        <div class="project-grid">
+
+
+            <div class="project-card">
+
+                <div class="project-visual">
+                    SUMS
+                </div>
+
+                <div class="project-info">
+
+                    <div class="project-name">
+                        SUMS
+                    </div>
+
+                    <div class="project-description">
+
+                        A website I worked on for my friend Unathi's
+                        clothing brand. Unathi is the founder of SUMS.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="project-card">
+
+                <div class="project-visual">
+                    UNI CIRCLE
+                </div>
+
+                <div class="project-info">
+
+                    <div class="project-name">
+                        Uni Circle
+                    </div>
+
+                    <div class="project-description">
+
+                        A university-focused application I am currently
+                        building and developing.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
 
     </div>
 
 </section>
-
 
 
 <!-- =====================================================
      THINGS I'M BUILDING
 ===================================================== -->
 
-<section class="chapter empty-chapter" id="building">
+<section class="documentary-section" id="building">
 
-    <div class="chapter-number">
-        04
-    </div>
+    <div class="section-inner">
 
-    <div class="chapter-content">
+        <div class="section-header">
 
-        <div class="chapter-top">
-            CHAPTER 04
+            <div class="section-number">
+                CHAPTER 05
+            </div>
+
+            <h2 class="section-title">
+                things<br>
+                i'm building
+            </h2>
+
         </div>
 
-        <h2 class="chapter-title">
-            things<br>
-            i'm building
-        </h2>
+
+        <div class="info-grid">
+
+
+            <div class="info-card full">
+
+                <div class="card-number">
+                    01 — RIGHT NOW
+                </div>
+
+                <div class="card-title">
+                    Learning by building.
+                </div>
+
+                <div class="card-text">
+
+                    Right now, I am becoming more interested in creating
+                    things with technology. I want to build websites for
+                    people, taking their ideas and turning them into
+                    something real that they can use. At the same time,
+                    I want to create my own applications and eventually
+                    have people using things that I came up with myself.
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="card-number">
+                    02 — WEBSITES
+                </div>
+
+                <div class="card-title">
+                    Building for people.
+                </div>
+
+                <div class="card-text">
+
+                    I want to create websites for people and learn how
+                    to turn their ideas into something real.
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="card-number">
+                    03 — APPS
+                </div>
+
+                <div class="card-title">
+                    Building my own ideas.
+                </div>
+
+                <div class="card-text">
+
+                    I want to create applications from my own ideas
+                    and eventually have people using them.
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card full">
+
+                <div class="card-number">
+                    04 — THE DIRECTION
+                </div>
+
+                <div class="card-title">
+                    I want to build.
+                </div>
+
+                <div class="card-text">
+
+                    I don't want coding to remain something I only learn
+                    about. I want to actually build with it and keep
+                    creating websites, applications, and eventually
+                    businesses around the things I create.
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
 </section>
-
 
 
 <!-- =====================================================
      THINGS I WANT TO CREATE
 ===================================================== -->
 
-<section class="chapter empty-chapter" id="create">
+<section class="documentary-section" id="create">
 
-    <div class="chapter-number">
-        05
-    </div>
+    <div class="section-inner">
 
-    <div class="chapter-content">
+        <div class="section-header">
 
-        <div class="chapter-top">
-            CHAPTER 05
+            <div class="section-number">
+                CHAPTER 06
+            </div>
+
+            <h2 class="section-title">
+                things i<br>
+                want to create
+            </h2>
+
         </div>
 
-        <h2 class="chapter-title">
-            things i<br>
-            want to create
-        </h2>
+
+        <div class="idea-grid">
+
+
+            <div class="idea-card">
+
+                <div class="idea-number">
+                    IDEA 01
+                </div>
+
+                <div class="idea-title">
+                    Websites
+                </div>
+
+            </div>
+
+
+            <div class="idea-card">
+
+                <div class="idea-number">
+                    IDEA 02
+                </div>
+
+                <div class="idea-title">
+                    Applications
+                </div>
+
+            </div>
+
+
+            <div class="idea-card">
+
+                <div class="idea-number">
+                    IDEA 03
+                </div>
+
+                <div class="idea-title">
+                    Businesses
+                </div>
+
+            </div>
+
+
+        </div>
 
     </div>
 
 </section>
-
 
 
 <!-- =====================================================
      MY MIND
 ===================================================== -->
 
-<section class="chapter empty-chapter" id="mind">
+<section class="documentary-section" id="mind">
 
-    <div class="chapter-number">
-        06
-    </div>
+    <div class="section-inner">
 
-    <div class="chapter-content">
+        <div class="section-header">
 
-        <div class="chapter-top">
-            CHAPTER 06
+            <div class="section-number">
+                CHAPTER 07
+            </div>
+
+            <h2 class="section-title">
+                my<br>
+                mind
+            </h2>
+
         </div>
 
-        <h2 class="chapter-title">
-            my mind
-        </h2>
+
+        <div class="info-grid">
+
+
+            <div class="info-card full">
+
+                <div class="card-number">
+                    01 — CURRENTLY
+                </div>
+
+                <div class="card-title">
+                    Always learning.
+                </div>
+
+                <div class="card-text">
+
+                    I am still learning how to understand myself,
+                    technology, business, and the world around me.
+                    I don't know everything, and I don't think I ever
+                    will. But I enjoy knowing that there is always
+                    something new to discover.
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="card-number">
+                    02 — CURIOSITY
+                </div>
+
+                <div class="card-title">
+                    I want to know more.
+                </div>
+
+                <div class="card-text">
+
+                    The more I learn, the more curious I become.
+                    There is always another subject, another idea,
+                    or another skill to explore.
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="card-number">
+                    03 — DIFFERENT
+                </div>
+
+                <div class="card-title">
+                    I want to move differently.
+                </div>
+
+                <div class="card-text">
+
+                    I don't want to simply follow the same path as
+                    everyone else. I want to become my own person and
+                    build a life that feels true to me.
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
 </section>
-
 
 
 <!-- =====================================================
      MY DREAMS
 ===================================================== -->
 
-<section class="chapter empty-chapter" id="dreams">
+<section class="documentary-section" id="dreams">
 
-    <div class="chapter-number">
-        07
-    </div>
+    <div class="section-inner">
 
-    <div class="chapter-content">
+        <div class="section-header">
 
-        <div class="chapter-top">
-            CHAPTER 07
+            <div class="section-number">
+                CHAPTER 08
+            </div>
+
+            <h2 class="section-title">
+                my<br>
+                dreams
+            </h2>
+
         </div>
 
-        <h2 class="chapter-title">
-            my dreams
-        </h2>
+
+        <div class="info-grid">
+
+
+            <div class="info-card">
+
+                <div class="card-number">
+                    01 — BUSINESS
+                </div>
+
+                <div class="card-title">
+                    Own businesses.
+                </div>
+
+                <div class="card-text">
+
+                    I want to build and own businesses and create
+                    something that can change the situation I come from.
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="card-number">
+                    02 — TECHNOLOGY
+                </div>
+
+                <div class="card-title">
+                    Become a developer.
+                </div>
+
+                <div class="card-text">
+
+                    I want to become a developer and build useful
+                    things through coding and technology.
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card full">
+
+                <div class="card-number">
+                    03 — FAMILY
+                </div>
+
+                <div class="card-title">
+                    Change where I come from.
+                </div>
+
+                <div class="card-text">
+
+                    I come from a family that has never had much
+                    financially. One of my biggest motivations is to
+                    work towards changing that and creating a better
+                    future for myself and my family.
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
 </section>
-
 
 
 <!-- =====================================================
@@ -1003,10 +1786,10 @@ footer {
 
 <section class="chapter future" id="future">
 
-    <div class="chapter-content">
+    <div class="future-content">
 
         <div class="future-small">
-            CHAPTER 08
+            CHAPTER 09 — STILL BEING WRITTEN
         </div>
 
         <h2 class="future-title">
@@ -1019,15 +1802,12 @@ footer {
 </section>
 
 
-
 <!-- =====================================================
      FOOTER
 ===================================================== -->
 
 <footer>
-
     THE STORY CONTINUES
-
 </footer>
 
 
@@ -1037,9 +1817,13 @@ footer {
    CHAPTER INDICATOR
 ========================================================= */
 
-const chapters = document.querySelectorAll(".chapter");
+const chapters = document.querySelectorAll(
+    ".chapter, .documentary-section"
+);
 
-const dots = document.querySelectorAll(".chapter-dot");
+const dots = document.querySelectorAll(
+    ".chapter-dot"
+);
 
 const observer = new IntersectionObserver(
 
@@ -1053,15 +1837,12 @@ const observer = new IntersectionObserver(
                     Array.from(chapters)
                     .indexOf(entry.target);
 
-                dots.forEach(dot =>
-                    dot.classList.remove("active")
-                );
+                dots.forEach(dot => {
+                    dot.classList.remove("active");
+                });
 
                 if (dots[index]) {
-
-                    dots[index]
-                        .classList.add("active");
-
+                    dots[index].classList.add("active");
                 }
 
             }
@@ -1071,14 +1852,60 @@ const observer = new IntersectionObserver(
     },
 
     {
-        threshold: 0.55
+        threshold: 0.45
     }
 
 );
 
 chapters.forEach(chapter => {
-
     observer.observe(chapter);
+});
+
+
+/* =========================================================
+   SMOOTH CARD APPEARANCE
+========================================================= */
+
+const cards = document.querySelectorAll(
+    ".info-card, .project-card, .idea-card, .timeline-card"
+);
+
+const cardObserver = new IntersectionObserver(
+
+    entries => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+
+                cardObserver.unobserve(entry.target);
+
+            }
+
+        });
+
+    },
+
+    {
+        threshold: 0.12
+    }
+
+);
+
+
+cards.forEach(card => {
+
+    card.style.opacity = "0";
+
+    card.style.transform = "translateY(25px)";
+
+    card.style.transition =
+        "opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1), border-color .4s ease";
+
+    cardObserver.observe(card);
 
 });
 
@@ -1094,11 +1921,14 @@ window.addEventListener("scroll", () => {
 
     numbers.forEach(number => {
 
+        const parent =
+            number.parentElement;
+
         const rect =
-            number.parentElement.getBoundingClientRect();
+            parent.getBoundingClientRect();
 
         const movement =
-            rect.top * -0.05;
+            rect.top * -0.035;
 
         number.style.transform =
             `translateY(${movement}px)`;
@@ -1108,7 +1938,6 @@ window.addEventListener("scroll", () => {
 });
 
 </script>
-
 
 </body>
 </html>
