@@ -9,64 +9,129 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600&display=swap');
 
+:root {
+    --black: #050505;
+    --panel: #0c0c0c;
+    --panel2: #111111;
+    --white: #ffffff;
+    --soft: #d5d5d5;
+    --gray: #777;
+    --darkgray: #3a3a3a;
+    --line: rgba(255,255,255,.10);
+    --accent: #aeb9c8;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html,
+body {
+    width: 100%;
+    min-height: 100%;
 }
 
 body {
-    background: #050505;
-    color: #f4f4f4;
-    overflow-x: hidden;
+    background: var(--black);
+    color: var(--white);
     font-family: Manrope, Arial, sans-serif;
+    overflow-x: hidden;
 }
 
 /* =========================
-   INTRO
+   LOADING SCREEN
 ========================= */
 
-.intro {
+.loader {
     position: fixed;
     inset: 0;
-    z-index: 10000;
-    background: #050505;
+    z-index: 99999;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: introOut 1s ease forwards;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #20262d 0%,
+            #0c0e10 35%,
+            #030303 75%
+        );
+
+    animation: loaderOut .9s ease forwards;
     animation-delay: 2.35s;
 }
 
-.intro img {
-    width: min(360px, 65vw);
-    height: auto;
-    max-height: 220px;
-    object-fit: contain;
-    display: block;
-    opacity: 0;
-    animation: logoReveal 1.5s ease forwards;
+.loader::before {
+    content: "";
+
+    position: absolute;
+
+    width: 340px;
+    height: 340px;
+
+    border-radius: 50%;
+
+    background: rgba(190,205,220,.10);
+
+    filter: blur(80px);
 }
 
-@keyframes logoReveal {
+.loader-logo {
+    position: relative;
+    z-index: 2;
+
+    width: min(430px, 72vw);
+    max-height: 300px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 0 25px rgba(255,255,255,.22));
+
+    animation: logoIn 1.5s cubic-bezier(.2,.8,.2,1) forwards;
+
+    opacity: 0;
+    transform: scale(.82);
+}
+
+.loader-text {
+    position: absolute;
+
+    bottom: 45px;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 8px;
+    letter-spacing: 5px;
+
+    color: rgba(255,255,255,.45);
+}
+
+@keyframes logoIn {
+
     0% {
         opacity: 0;
-        transform: scale(.92);
-        filter: blur(12px);
+        transform: scale(.82);
+        filter:
+            blur(12px)
+            drop-shadow(0 0 0 transparent);
     }
 
     100% {
         opacity: 1;
         transform: scale(1);
-        filter: blur(0);
+        filter:
+            blur(0)
+            drop-shadow(0 0 30px rgba(255,255,255,.22));
     }
 }
 
-@keyframes introOut {
+@keyframes loaderOut {
+
     0% {
         opacity: 1;
         visibility: visible;
@@ -83,142 +148,162 @@ body {
    BACKGROUND
 ========================= */
 
-.grid {
+.grid-bg {
     position: fixed;
     inset: 0;
     z-index: -5;
-    opacity: .14;
 
     background-image:
-        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
 
-    background-size: 70px 70px;
+    background-size: 65px 65px;
 
-    mask-image: linear-gradient(
-        to bottom,
-        black,
-        transparent 90%
-    );
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 95%
+        );
 }
 
 .glow {
     position: fixed;
-    width: 550px;
-    height: 550px;
+
+    width: 600px;
+    height: 600px;
+
     border-radius: 50%;
-    background: rgba(255,255,255,.045);
-    filter: blur(100px);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(170,185,205,.055),
+            transparent 65%
+        );
+
+    filter: blur(30px);
+
     pointer-events: none;
+
     z-index: -4;
+
     top: 10%;
     left: 50%;
+
     transform: translateX(-50%);
 }
 
-.noise {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 9998;
-    opacity: .035;
-
-    background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
 /* =========================
-   CURSOR
+   TOP BAR
 ========================= */
 
-.cursor {
-    position: fixed;
-    width: 12px;
-    height: 12px;
-    border: 1px solid rgba(255,255,255,.8);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 10001;
-    transform: translate(-50%, -50%);
+.topbar {
+    width: 100%;
 
-    transition:
-        width .2s ease,
-        height .2s ease,
-        background .2s ease;
-}
-
-.cursor.big {
-    width: 42px;
-    height: 42px;
-    background: rgba(255,255,255,.06);
-}
-
-/* =========================
-   NAV
-========================= */
-
-.nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: 90px;
-    padding: 0 45px;
+    padding:
+        28px 45px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    z-index: 900;
+    border-bottom:
+        1px solid var(--line);
 
-    border-bottom: 1px solid rgba(255,255,255,.07);
+    background:
+        rgba(5,5,5,.72);
 
-    background: rgba(5,5,5,.58);
-    backdrop-filter: blur(18px);
+    backdrop-filter: blur(20px);
+
+    position: relative;
+    z-index: 50;
 }
 
-.logo-small {
+.brand {
     display: flex;
     align-items: center;
-    gap: 16px;
+
+    gap: 18px;
 }
 
-.logo-small img {
-    width: 58px;
-    height: 58px;
+.brand img {
+    width: 75px;
+    height: 75px;
+
     object-fit: contain;
+
     display: block;
+
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(255,255,255,.10)
+        );
 }
 
-.logo-name {
+.brand-text {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.brand-name {
     font-family: "DM Mono", monospace;
-    font-size: 8px;
-    letter-spacing: 3px;
-    color: #aaa;
+
+    font-size: 10px;
+    letter-spacing: 4px;
 }
 
-.nav-status {
+.brand-sub {
+    font-family: "DM Mono", monospace;
+
+    font-size: 7px;
+    letter-spacing: 2px;
+
+    color: #555;
+}
+
+.top-status {
     display: flex;
     align-items: center;
-    gap: 10px;
+
+    gap: 9px;
 
     font-family: "DM Mono", monospace;
+
     font-size: 8px;
+
     letter-spacing: 2px;
-    color: #777;
+
+    color: #666;
 }
 
 .status-dot {
     width: 5px;
     height: 5px;
+
     background: white;
+
     border-radius: 50%;
+
+    box-shadow:
+        0 0 12px
+        rgba(255,255,255,.7);
 
     animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
+
     0%,100% {
         opacity: .3;
     }
@@ -229,288 +314,178 @@ body {
 }
 
 /* =========================
-   CHAPTER NAV
+   MAIN
 ========================= */
 
-.chapter-nav {
-    position: fixed;
-    right: 35px;
-    top: 50%;
+.main {
+    width: min(1450px, 92%);
 
-    transform: translateY(-50%);
+    margin: auto;
 
-    z-index: 500;
+    padding:
+        75px 0 100px;
+}
 
+.heading-row {
     display: flex;
-    flex-direction: column;
-    gap: 13px;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 45px;
 }
 
-.chapter-nav span {
-    width: 5px;
-    height: 5px;
-
-    border-radius: 50%;
-
-    background: #444;
-
-    transition: .35s;
-}
-
-.chapter-nav span.active {
-    background: white;
-
-    box-shadow:
-        0 0 12px rgba(255,255,255,.7);
-
-    transform: scale(1.8);
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-    min-height: 100vh;
-
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-}
-
-.hero-content {
-    width: 90%;
-    max-width: 1400px;
-
-    position: relative;
-    z-index: 2;
-}
-
-.hero-meta {
+.heading-label {
     font-family: "DM Mono", monospace;
 
     font-size: 8px;
-    letter-spacing: 4px;
 
-    color: #666;
+    letter-spacing: 5px;
 
-    margin-bottom: 35px;
+    color: #555;
+
+    margin-bottom: 20px;
 }
 
-.hero-title {
-    font-size: clamp(75px, 14vw, 200px);
+.heading {
+    font-size:
+        clamp(60px, 10vw, 140px);
 
     line-height: .78;
 
-    letter-spacing: -10px;
-
-    font-weight: 300;
-}
-
-.hero-title div {
-    overflow: hidden;
-}
-
-.hero-title span {
-    display: block;
-
-    animation:
-        titleIn 1.5s
-        cubic-bezier(.2,.8,.2,1)
-        forwards;
-
-    transform: translateY(110%);
-}
-
-.hero-title div:nth-child(2) span {
-    animation-delay: .15s;
-}
-
-@keyframes titleIn {
-    to {
-        transform: translateY(0);
-    }
-}
-
-.hero-subtitle {
-    margin-top: 50px;
-
-    max-width: 470px;
-
-    font-size: 14px;
-    line-height: 1.7;
-
-    color: #858585;
-}
-
-.hero-date {
-    position: absolute;
-
-    right: 0;
-    bottom: 10px;
-
-    font-family: "DM Mono", monospace;
-
-    font-size: 8px;
-    letter-spacing: 3px;
-
-    color: #555;
-}
-
-.scroll {
-    position: absolute;
-
-    bottom: 35px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    font-family: "DM Mono", monospace;
-
-    font-size: 7px;
-    letter-spacing: 4px;
-
-    color: #555;
-}
-
-.scroll::after {
-    content: "";
-
-    display: block;
-
-    width: 1px;
-    height: 35px;
-
-    background: #555;
-
-    margin: 12px auto 0;
-}
-
-/* =========================
-   SECTIONS
-========================= */
-
-.section {
-    min-height: 100vh;
-
-    padding: 160px 9%;
-
-    position: relative;
-}
-
-.section-inner {
-    max-width: 1250px;
-
-    margin: auto;
-}
-
-.section-label {
-    font-family: "DM Mono", monospace;
-
-    font-size: 8px;
-    letter-spacing: 4px;
-
-    color: #555;
-
-    margin-bottom: 25px;
-}
-
-.section-title {
-    font-size: clamp(65px, 10vw, 145px);
-
-    font-weight: 300;
-
-    line-height: .8;
-
     letter-spacing: -8px;
 
-    margin-bottom: 80px;
+    font-weight: 300;
 }
 
-.section-title em {
-    font-style: normal;
+.heading span {
+    color: #555;
+}
+
+.archive-date {
+    text-align: right;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 8px;
+
+    line-height: 2;
+
+    letter-spacing: 2px;
+
     color: #555;
 }
 
 /* =========================
-   CARDS
+   INTRO MESSAGE
 ========================= */
 
-.cards {
+.intro-message {
+    max-width: 620px;
+
+    color: #777;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    margin-bottom: 60px;
+}
+
+/* =========================
+   ARCHIVE GRID
+========================= */
+
+.archive {
     display: grid;
 
     grid-template-columns:
-        repeat(2, 1fr);
+        repeat(3, 1fr);
 
-    gap: 18px;
+    gap: 16px;
 }
 
-.card {
+/* =========================
+   ARCHIVE CARD
+========================= */
+
+.archive-card {
     position: relative;
 
-    padding: 35px;
+    min-height: 330px;
 
-    min-height: 280px;
+    padding: 30px;
 
     border:
-        1px solid
-        rgba(255,255,255,.09);
+        1px solid var(--line);
 
     background:
         linear-gradient(
-            135deg,
+            145deg,
             rgba(255,255,255,.055),
             rgba(255,255,255,.012)
         );
 
-    backdrop-filter: blur(16px);
-
     overflow: hidden;
 
+    cursor: pointer;
+
     transition:
-        transform .5s
-        cubic-bezier(.2,.8,.2,1),
-        border-color .4s ease;
+        transform .45s cubic-bezier(.2,.8,.2,1),
+        border-color .4s,
+        background .4s;
 }
 
-.card::before {
+.archive-card::before {
     content: "";
 
     position: absolute;
 
-    width: 160px;
-    height: 160px;
+    width: 240px;
+    height: 240px;
 
-    top: -100px;
-    right: -100px;
+    right: -130px;
+    bottom: -130px;
 
     border-radius: 50%;
 
     background:
-        rgba(255,255,255,.06);
+        rgba(175,190,210,.08);
 
-    filter: blur(30px);
+    filter: blur(35px);
 
-    transition: .5s;
+    transition: .6s;
 }
 
-.card:hover {
-    transform: translateY(-7px);
+.archive-card:hover {
+    transform: translateY(-8px);
 
     border-color:
-        rgba(255,255,255,.25);
+        rgba(255,255,255,.28);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.02)
+        );
 }
 
-.card:hover::before {
-    transform: scale(1.8);
+.archive-card:hover::before {
+    transform: scale(1.5);
 }
 
-.card.full {
-    grid-column: 1 / -1;
+.archive-card.wide {
+    grid-column: span 2;
+}
+
+.card-top {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .card-number {
@@ -521,26 +496,294 @@ body {
     letter-spacing: 3px;
 
     color: #555;
-
-    margin-bottom: 40px;
 }
 
-.card h3 {
-    font-size: 29px;
+.card-arrow {
+    font-family: "DM Mono", monospace;
+
+    font-size: 13px;
+
+    color: #555;
+
+    transition: .3s;
+}
+
+.archive-card:hover .card-arrow {
+    color: white;
+
+    transform:
+        translate(4px,-4px);
+}
+
+.card-content {
+    position: absolute;
+
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+}
+
+.card-title {
+    font-size: 36px;
 
     font-weight: 300;
 
-    margin-bottom: 20px;
+    letter-spacing: -2px;
+
+    margin-bottom: 13px;
 }
 
-.card p {
-    color: #929292;
+.card-description {
+    max-width: 470px;
 
-    font-size: 15px;
+    color: #707070;
 
-    line-height: 1.8;
+    font-size: 12px;
 
-    max-width: 900px;
+    line-height: 1.7;
+}
+
+.card-tag {
+    display: inline-block;
+
+    margin-top: 22px;
+
+    padding:
+        6px 9px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+    color: #555;
+}
+
+/* =========================
+   FEATURE CARD
+========================= */
+
+.feature {
+    min-height: 440px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.feature-title {
+    font-size:
+        clamp(45px, 5vw, 80px);
+
+    line-height: .85;
+
+    letter-spacing: -5px;
+
+    font-weight: 300;
+}
+
+.feature-title span {
+    color: #555;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    border-top:
+        1px solid var(--line);
+
+    margin-top: 30px;
+
+    padding:
+        35px 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+    color: #444;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    background:
+        rgba(3,3,3,.94);
+
+    backdrop-filter:
+        blur(25px);
+
+    display: none;
+
+    overflow-y: auto;
+}
+
+.modal.active {
+    display: block;
+
+    animation:
+        modalIn .35s ease;
+}
+
+@keyframes modalIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-inner {
+    width: min(1100px, 90%);
+
+    min-height: 100vh;
+
+    margin: auto;
+
+    padding:
+        55px 0 80px;
+}
+
+.modal-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    border-bottom:
+        1px solid var(--line);
+
+    padding-bottom: 30px;
+
+    margin-bottom: 45px;
+}
+
+.modal-number {
+    font-family: "DM Mono", monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 4px;
+
+    color: #555;
+
+    margin-bottom: 18px;
+}
+
+.modal-title {
+    font-size:
+        clamp(55px, 9vw, 110px);
+
+    font-weight: 300;
+
+    letter-spacing: -7px;
+
+    line-height: .8;
+}
+
+.close {
+    width: 45px;
+    height: 45px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: .3s;
+}
+
+.close:hover {
+    background: white;
+
+    color: black;
+}
+
+.modal-content {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+.info-box {
+    padding: 30px;
+
+    min-height: 220px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+.info-box.full {
+    grid-column: 1 / -1;
+}
+
+.info-label {
+    font-family: "DM Mono", monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+    color: #555;
+
+    margin-bottom: 25px;
+}
+
+.info-box h3 {
+    font-size: 27px;
+
+    font-weight: 300;
+
+    margin-bottom: 17px;
+}
+
+.info-box p {
+    color: #858585;
+
+    font-size: 14px;
+
+    line-height: 1.85;
 }
 
 /* =========================
@@ -548,38 +791,25 @@ body {
 ========================= */
 
 .timeline {
-    position: relative;
+    display: grid;
 
-    border-left:
-        1px solid #292929;
+    grid-template-columns:
+        repeat(2, 1fr);
 
-    margin-left: 20px;
+    gap: 15px;
 }
 
-.timeline-item {
-    position: relative;
+.timeline-box {
+    min-height: 260px;
 
-    padding:
-        0 0 65px 60px;
-}
+    padding: 30px;
 
-.timeline-item::before {
-    content: "";
+    border:
+        1px solid
+        rgba(255,255,255,.09);
 
-    position: absolute;
-
-    left: -4px;
-    top: 5px;
-
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: #777;
-
-    box-shadow:
-        0 0 0 6px #050505;
+    background:
+        rgba(255,255,255,.025);
 }
 
 .timeline-year {
@@ -589,209 +819,51 @@ body {
 
     letter-spacing: 3px;
 
-    color: #666;
+    color: var(--accent);
 
-    margin-bottom: 15px;
+    margin-bottom: 35px;
 }
 
-.timeline-item h3 {
-    font-size: 35px;
+.timeline-box h3 {
+    font-size: 28px;
 
     font-weight: 300;
 
     margin-bottom: 15px;
 }
 
-.timeline-item p {
-    color: #888;
+.timeline-box p {
+    color: #777;
 
-    font-size: 15px;
+    font-size: 13px;
 
     line-height: 1.75;
-
-    max-width: 800px;
 }
 
 /* =========================
    PROJECTS
 ========================= */
 
-.projects {
+.project-grid {
     display: grid;
 
     grid-template-columns:
         repeat(2, 1fr);
 
-    gap: 20px;
-}
-
-.project {
-    min-height: 420px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    background: #0b0b0b;
-
-    overflow: hidden;
-
-    transition: .6s;
-}
-
-.project:hover {
-    transform: translateY(-8px);
-
-    border-color:
-        rgba(255,255,255,.3);
-}
-
-.project-link {
-    display: block;
-
-    height: 100%;
-
-    color: inherit;
-
-    text-decoration: none;
-}
-
-.project-visual {
-    height: 255px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    position: relative;
-
-    overflow: hidden;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.03) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            rgba(255,255,255,.03) 1px,
-            transparent 1px
-        ),
-        #111;
-
-    background-size: 35px 35px;
-}
-
-.project-visual::after {
-    content: "";
-
-    position: absolute;
-
-    width: 250px;
-    height: 250px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.15);
-
-    border-radius: 50%;
-
-    animation:
-        rotate 12s
-        linear
-        infinite;
-}
-
-.project-visual span {
-    font-family: "DM Mono", monospace;
-
-    font-size: 11px;
-
-    letter-spacing: 6px;
-
-    z-index: 2;
-}
-
-@keyframes rotate {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.project-info {
-    padding: 30px;
-}
-
-.project-number {
-    font-family: "DM Mono", monospace;
-
-    font-size: 8px;
-
-    letter-spacing: 3px;
-
-    color: #555;
-
-    margin-bottom: 15px;
-}
-
-.project-info h3 {
-    font-size: 32px;
-
-    font-weight: 300;
-
-    margin-bottom: 10px;
-}
-
-.project-info p {
-    color: #777;
-
-    line-height: 1.6;
-
-    font-size: 14px;
-}
-
-.project-open {
-    margin-top: 25px;
-
-    font-family: "DM Mono", monospace;
-
-    font-size: 8px;
-
-    letter-spacing: 3px;
-
-    color: #777;
-
-    transition: .3s ease;
-}
-
-.project:hover .project-open {
-    color: white;
-
-    letter-spacing: 5px;
-}
-
-/* =========================
-   IDEAS
-========================= */
-
-.idea-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
     gap: 15px;
 }
 
-.idea {
-    min-height: 270px;
+.project-card {
+    min-height: 350px;
 
     padding: 30px;
 
     border:
         1px solid
-        rgba(255,255,255,.09);
+        rgba(255,255,255,.10);
+
+    background:
+        #0b0b0b;
 
     display: flex;
 
@@ -799,307 +871,233 @@ body {
 
     justify-content: space-between;
 
-    background:
-        rgba(255,255,255,.015);
-
-    transition: .5s;
+    transition: .4s;
 }
 
-.idea:hover {
-    background:
-        rgba(255,255,255,.055);
+.project-card:hover {
+    transform: translateY(-6px);
 
-    transform: translateY(-7px);
+    border-color:
+        rgba(255,255,255,.3);
 }
 
-.idea small {
-    font-family: "DM Mono", monospace;
-
-    font-size: 8px;
-
-    color: #555;
-
-    letter-spacing: 3px;
-}
-
-.idea h3 {
-    font-size: 32px;
-
-    font-weight: 300;
-}
-
-/* =========================
-   STATEMENT
-========================= */
-
-.statement {
-    min-height: 80vh;
+.project-symbol {
+    height: 170px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    text-align: center;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.08),
+            transparent 65%
+        );
 
-    padding: 120px 8%;
-}
+    border:
+        1px solid
+        rgba(255,255,255,.06);
 
-.statement-text {
-    font-size:
-        clamp(50px, 9vw, 130px);
-
-    line-height: .9;
-
-    font-weight: 300;
-
-    letter-spacing: -7px;
-}
-
-.statement-text span {
-    color: #4d4d4d;
-}
-
-/* =========================
-   FUTURE
-========================= */
-
-.future {
-    min-height: 110vh;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-
-    position: relative;
-}
-
-.future-small {
     font-family: "DM Mono", monospace;
-
-    font-size: 8px;
 
     letter-spacing: 5px;
 
-    color: #555;
-
-    margin-bottom: 45px;
+    font-size: 11px;
 }
 
-.future-title {
-    font-size:
-        clamp(75px, 15vw, 190px);
+.project-details {
+    padding-top: 25px;
+}
+
+.project-details h3 {
+    font-size: 30px;
 
     font-weight: 300;
 
-    line-height: .75;
-
-    letter-spacing: -11px;
+    margin-bottom: 10px;
 }
 
-.future-description {
-    max-width: 450px;
+.project-details p {
+    color: #777;
 
-    margin:
-        55px auto 0;
+    font-size: 13px;
 
-    color: #666;
+    line-height: 1.6;
+}
 
-    line-height: 1.7;
+.project-button {
+    display: inline-block;
 
-    font-size: 14px;
+    margin-top: 18px;
+
+    color: #aaa;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+    text-decoration: none;
+
+    transition: .3s;
+}
+
+.project-button:hover {
+    color: white;
+
+    letter-spacing: 5px;
 }
 
 /* =========================
-   FOOTER
+   MODAL BOTTOM
 ========================= */
 
-footer {
-    min-height: 180px;
-
-    padding: 50px 8%;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.08);
+.modal-bottom {
+    margin-top: 45px;
 
     display: flex;
 
     justify-content: space-between;
     align-items: center;
 
-    color: #444;
+    border-top:
+        1px solid
+        var(--line);
 
+    padding-top: 25px;
+}
+
+.back-text {
     font-family: "DM Mono", monospace;
 
-    font-size: 8px;
+    font-size: 7px;
 
     letter-spacing: 3px;
-}
 
-.footer-logo {
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-}
-
-.footer-logo img {
-    width: 48px;
-    height: 48px;
-
-    object-fit: contain;
-
-    display: block;
-}
-
-/* =========================
-   REVEALS
-========================= */
-
-.reveal {
-    opacity: 0;
-
-    transform: translateY(45px);
-
-    transition:
-        opacity 1s ease,
-        transform 1s
-        cubic-bezier(.2,.8,.2,1);
-}
-
-.reveal.visible {
-    opacity: 1;
-
-    transform: translateY(0);
+    color: #555;
 }
 
 /* =========================
    MOBILE
 ========================= */
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 
-    .cursor {
+    .topbar {
+        padding:
+            20px;
+    }
+
+    .brand img {
+        width: 58px;
+        height: 58px;
+    }
+
+    .top-status {
         display: none;
     }
 
-    .nav {
-        height: 70px;
+    .main {
+        width: 90%;
 
-        padding:
-            0 20px;
+        padding-top: 55px;
     }
 
-    .logo-small img {
-        width: 48px;
-        height: 48px;
+    .heading-row {
+        display: block;
     }
 
-    .chapter-nav {
-        display: none;
+    .archive-date {
+        text-align: left;
+
+        margin-top: 30px;
     }
 
-    .hero-content {
-        width: 84%;
-    }
-
-    .hero-title {
-        font-size: 70px;
-
-        letter-spacing: -5px;
-    }
-
-    .hero-subtitle {
-        font-size: 13px;
-    }
-
-    .hero-date {
-        position: static;
-
-        margin-top: 35px;
-    }
-
-    .section {
-        padding:
-            110px 6%;
-    }
-
-    .section-title {
-        font-size: 68px;
-
-        letter-spacing: -5px;
-
-        margin-bottom: 55px;
-    }
-
-    .cards,
-    .projects {
+    .archive {
         grid-template-columns: 1fr;
     }
 
-    .card.full {
+    .archive-card.wide {
         grid-column: auto;
     }
 
-    .card {
-        padding: 27px;
-
-        min-height: 0;
+    .archive-card {
+        min-height: 300px;
     }
 
-    .card h3 {
-        font-size: 27px;
-    }
-
-    .card p {
-        font-size: 14px;
-    }
-
-    .timeline {
-        margin-left: 10px;
-    }
-
-    .timeline-item {
-        padding-left: 35px;
-    }
-
-    .timeline-item h3 {
-        font-size: 28px;
-    }
-
-    .idea-grid {
+    .modal-content,
+    .timeline,
+    .project-grid {
         grid-template-columns: 1fr;
     }
 
-    .statement {
-        min-height: 65vh;
+    .info-box.full {
+        grid-column: auto;
     }
 
-    .statement-text {
-        font-size: 55px;
-
+    .modal-title {
         letter-spacing: -4px;
     }
+}
 
-    .future-title {
-        font-size: 75px;
+@media (max-width: 500px) {
 
-        letter-spacing: -6px;
+    .loader-logo {
+        width: 75vw;
     }
 
-    footer {
+    .loader::before {
+        width: 250px;
+        height: 250px;
+    }
+
+    .brand-text {
+        display: none;
+    }
+
+    .heading {
+        font-size: 65px;
+
+        letter-spacing: -5px;
+    }
+
+    .archive-card {
+        min-height: 280px;
+
+        padding: 25px;
+    }
+
+    .card-content {
+        left: 25px;
+        right: 25px;
+        bottom: 25px;
+    }
+
+    .card-title {
+        font-size: 30px;
+    }
+
+    .modal-inner {
+        width: 90%;
+
+        padding-top: 30px;
+    }
+
+    .modal-header {
+        gap: 20px;
+    }
+
+    .modal-title {
+        font-size: 55px;
+    }
+
+    .footer {
         flex-direction: column;
 
-        gap: 30px;
-
-        justify-content: center;
-
-        text-align: center;
+        gap: 15px;
     }
 }
 </style>
@@ -1108,42 +1106,54 @@ footer {
 <body>
 
 <!-- =========================
-     INTRO LOGO
+     LOADER
 ========================= -->
 
-<div class="intro">
+<div class="loader">
+
     <img
         src="logo.png"
         alt="Before The Name"
+        class="loader-logo"
     >
+
+    <div class="loader-text">
+        ARCHIVE 001 / 2026
+    </div>
+
 </div>
 
-<div class="grid"></div>
+<div class="grid-bg"></div>
 <div class="glow"></div>
-<div class="noise"></div>
-
-<div class="cursor"></div>
 
 <!-- =========================
-     NAV
+     TOP BAR
 ========================= -->
 
-<nav class="nav">
+<header class="topbar">
 
-    <div class="logo-small">
+    <div class="brand">
 
         <img
             src="logo.png"
             alt="Before The Name"
         >
 
-        <div class="logo-name">
-            BEFORE THE NAME
+        <div class="brand-text">
+
+            <div class="brand-name">
+                BEFORE THE NAME
+            </div>
+
+            <div class="brand-sub">
+                A DOCUMENTARY OF ONE LIFE
+            </div>
+
         </div>
 
     </div>
 
-    <div class="nav-status">
+    <div class="top-status">
 
         <span class="status-dot"></span>
 
@@ -1151,440 +1161,918 @@ footer {
 
     </div>
 
-</nav>
+</header>
+
 
 <!-- =========================
-     CHAPTER DOTS
+     MAIN ARCHIVE
 ========================= -->
 
-<div class="chapter-nav">
+<main class="main">
 
-    <span class="active"></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+    <div class="heading-row">
 
-</div>
+        <div>
 
-<!-- =========================
-     HERO
-========================= -->
+            <div class="heading-label">
+                PERSONAL ARCHIVE / 001
+            </div>
 
-<section class="hero chapter">
+            <h1 class="heading">
+                my<br>
+                <span>life.</span>
+            </h1>
 
-    <div class="hero-content">
-
-        <div class="hero-meta">
-            BEFORE THE NAME / ARCHIVE 001
         </div>
 
-        <h1 class="hero-title">
+        <div class="archive-date">
+
+            WRITTEN<br>
+            16 AUGUST 2026<br>
+            17:31<br>
+            PORT ST JOHNS, EASTERN CAPE
+
+        </div>
+
+    </div>
+
+
+    <p class="intro-message">
+
+        This is a record of where I come from,
+        what shaped me, what I have learned,
+        what I am building, and where I want to go.
+        It is not a finished story.
+
+    </p>
+
+
+    <!-- =========================
+         ARCHIVE CARDS
+    ========================= -->
+
+    <section class="archive">
+
+        <!-- 01 -->
+
+        <article
+            class="archive-card wide"
+            onclick="openModal('beginning')"
+        >
+
+            <div class="card-top">
+
+                <span class="card-number">
+                    01 / 09
+                </span>
+
+                <span class="card-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+            <div class="card-content">
+
+                <h2 class="card-title">
+                    My Beginning
+                </h2>
+
+                <p class="card-description">
+                    Where I come from, who I am,
+                    and the beginning of the person
+                    I am becoming.
+                </p>
+
+                <span class="card-tag">
+                    ORIGIN
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- 02 -->
+
+        <article
+            class="archive-card"
+            onclick="openModal('story')"
+        >
+
+            <div class="card-top">
+
+                <span class="card-number">
+                    02 / 09
+                </span>
+
+                <span class="card-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+            <div class="card-content">
+
+                <h2 class="card-title">
+                    My Story
+                </h2>
+
+                <p class="card-description">
+                    Home, family, childhood,
+                    struggles, lessons and the
+                    things that shaped my thinking.
+                </p>
+
+                <span class="card-tag">
+                    STORY
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- 03 -->
+
+        <article
+            class="archive-card"
+            onclick="openModal('journey')"
+        >
+
+            <div class="card-top">
+
+                <span class="card-number">
+                    03 / 09
+                </span>
+
+                <span class="card-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+            <div class="card-content">
+
+                <h2 class="card-title">
+                    My Journey
+                </h2>
+
+                <p class="card-description">
+                    2022 to now — the moments,
+                    decisions and changes that
+                    brought me here.
+                </p>
+
+                <span class="card-tag">
+                    TIMELINE
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- 04 -->
+
+        <article
+            class="archive-card"
+            onclick="openModal('built')"
+        >
+
+            <div class="card-top">
+
+                <span class="card-number">
+                    04 / 09
+                </span>
+
+                <span class="card-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+            <div class="card-content">
+
+                <h2 class="card-title">
+                    Things I've Built
+                </h2>
+
+                <p class="card-description">
+                    Websites, applications and
+                    ideas that have moved from
+                    my head into reality.
+                </p>
+
+                <span class="card-tag">
+                    PROJECTS
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- 05 -->
+
+        <article
+            class="archive-card"
+            onclick="openModal('building')"
+        >
+
+            <div class="card-top">
+
+                <span class="card-number">
+                    05 / 09
+                </span>
+
+                <span class="card-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+            <div class="card-content">
+
+                <h2 class="card-title">
+                    I'm Building
+                </h2>
+
+                <p class="card-description">
+                    The things I am currently
+                    learning, developing and
+                    working towards.
+                </p>
+
+                <span class="card-tag">
+                    NOW
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- 06 -->
+
+        <article
+            class="archive-card"
+            onclick="openModal('mind')"
+        >
+
+            <div class="card-top">
+
+                <span class="card-number">
+                    06 / 09
+                </span>
+
+                <span class="card-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+            <div class="card-content">
+
+                <h2 class="card-title">
+                    My Mind
+                </h2>
+
+                <p class="card-description">
+                    Curiosity, learning, mistakes,
+                    discipline and the way I see
+                    the world.
+                </p>
+
+                <span class="card-tag">
+                    THINKING
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- 07 -->
+
+        <article
+            class="archive-card"
+            onclick="openModal('dreams')"
+        >
+
+            <div class="card-top">
+
+                <span class="card-number">
+                    07 / 09
+                </span>
+
+                <span class="card-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+            <div class="card-content">
+
+                <h2 class="card-title">
+                    My Dreams
+                </h2>
+
+                <p class="card-description">
+                    The life I want to build,
+                    the businesses I want to own,
+                    and the developer I want to become.
+                </p>
+
+                <span class="card-tag">
+                    FUTURE
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- 08 -->
+
+        <article
+            class="archive-card"
+            onclick="openModal('create')"
+        >
+
+            <div class="card-top">
+
+                <span class="card-number">
+                    08 / 09
+                </span>
+
+                <span class="card-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+            <div class="card-content">
+
+                <h2 class="card-title">
+                    Things I Want
+                </h2>
+
+                <p class="card-description">
+                    Websites, applications,
+                    businesses and ideas I want
+                    to bring into the world.
+                </p>
+
+                <span class="card-tag">
+                    IDEAS
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- 09 -->
+
+        <article
+            class="archive-card feature"
+            onclick="openModal('future')"
+        >
+
+            <div class="card-top">
+
+                <span class="card-number">
+                    09 / 09
+                </span>
+
+                <span class="card-arrow">
+                    ↗
+                </span>
+
+            </div>
 
             <div>
-                <span>this</span>
-            </div>
 
-            <div>
-                <span>is me.</span>
-            </div>
-
-        </h1>
-
-        <p class="hero-subtitle">
-            A personal record of where I come from,
-            what I am learning, what I am building,
-            and who I am becoming.
-        </p>
-
-        <div class="hero-date">
-            16 / 08 / 2026 — 17:31
-        </div>
-
-    </div>
-
-    <div class="scroll">
-        SCROLL TO BEGIN
-    </div>
-
-</section>
-
-<!-- =========================
-     MY BEGINNING
-========================= -->
-
-<section class="section chapter">
-
-<div class="section-inner">
-
-    <div class="section-label">
-        CHAPTER 01 / MY BEGINNING
-    </div>
-
-    <h2 class="section-title reveal">
-        my<br>
-        beginning<em>.</em>
-    </h2>
-
-    <div class="cards">
-
-        <div class="card full reveal">
-
-            <div class="card-number">
-                01 — WHERE IT STARTED
-            </div>
-
-            <h3>
-                This is where I begin.
-            </h3>
-
-            <p>
-                My name is Ntsikelelo, and I come from Port St Johns
-                in the Eastern Cape. I'm writing this on Saturday,
-                16 August 2026, at 17:31, at a moment when I suddenly
-                had the idea to create this documentary for myself —
-                a place to record where I come from, where I'm going,
-                and what I want to become.
-            </p>
-
-        </div>
-
-        <div class="card reveal">
-
-            <div class="card-number">
-                02 — WHO I AM
-            </div>
-
-            <h3>
-                Curious by nature.
-            </h3>
-
-            <p>
-                I'm a curious person who loves reading, learning new
-                things, and moving differently from other people.
-                I wouldn't call myself a genius; I'm a hard worker
-                who developed a real love for learning and discovering
-                things beyond what I already know.
-            </p>
-
-        </div>
-
-        <div class="card reveal">
-
-            <div class="card-number">
-                03 — TODAY
-            </div>
-
-            <h3>
-                Still becoming.
-            </h3>
-
-            <p>
-                I'm currently a first-year B.Com Accounting student
-                at the University of Fort Hare. I used to be quite
-                disorganised and lost, but now I feel different.
-                I want to keep learning, building, and becoming
-                someone different.
-            </p>
-
-        </div>
-
-        <div class="card full reveal">
-
-            <div class="card-number">
-                04 — WHERE I'M GOING
-            </div>
-
-            <h3>
-                I want to build.
-            </h3>
-
-            <p>
-                Around June 2026, I discovered how much I enjoy
-                Computer Science, coding, and technology. I want to
-                continue with Accounting while learning those things
-                on the side. Eventually, I want to own businesses
-                and become a developer.
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-
-</section>
-
-<!-- =========================
-     MY STORY
-========================= -->
-
-<section class="section chapter">
-
-<div class="section-inner">
-
-    <div class="section-label">
-        CHAPTER 02 / MY STORY
-    </div>
-
-    <h2 class="section-title reveal">
-        my<br>
-        story<em>.</em>
-    </h2>
-
-    <div class="cards">
-
-        <div class="card full reveal">
-
-            <div class="card-number">
-                01 — HOME
-            </div>
-
-            <h3>
-                Port St Johns.
-            </h3>
-
-            <p>
-                Growing up in Port St Johns was not a bad experience
-                for me. There are schools, clinics, shops, churches,
-                and the basic things that make a community a home.
-                I had a good childhood, and although my family never
-                had much financially, my parents always made sure that
-                my siblings and I had food, clothes, education, and
-                the things we needed.
-            </p>
-
-        </div>
-
-        <div class="card reveal">
-
-            <div class="card-number">
-                02 — FAMILY
-            </div>
-
-            <h3>
-                We never had much.
-            </h3>
-
-            <p>
-                My mother used to clean at a local church and earned
-                around R1,000 a month. My father worked as a security
-                guard at the school I attended and earned around
-                R1,500. They worked in different years. Today,
-                neither of them is working, and my family still
-                depends on the SASSA grant.
-            </p>
-
-        </div>
-
-        <div class="card reveal">
-
-            <div class="card-number">
-                03 — CHURCH
-            </div>
-
-            <h3>
-                Part of my childhood.
-            </h3>
-
-            <p>
-                My family loved church. We used to go almost every
-                day, even when we didn't feel like going. Church was
-                simply part of our lives, and growing up with it
-                became one of the things that shaped me.
-            </p>
-
-        </div>
-
-        <div class="card full reveal">
-
-            <div class="card-number">
-                04 — LESSONS
-            </div>
-
-            <h3>
-                Mistakes taught me.
-            </h3>
-
-            <p>
-                I've made many mistakes, but I believe the most
-                important thing is learning from them. I've also
-                watched how certain choices can negatively affect
-                people's lives, and those experiences have helped me
-                decide what kind of person I don't want to become.
-                My past wasn't perfect, but it taught me a lot.
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-
-</section>
-
-<!-- =========================
-     MY JOURNEY
-========================= -->
-
-<section class="section chapter">
-
-<div class="section-inner">
-
-    <div class="section-label">
-        CHAPTER 03 / MY JOURNEY
-    </div>
-
-    <h2 class="section-title reveal">
-        my<br>
-        journey<em>.</em>
-    </h2>
-
-    <div class="timeline">
-
-        <div class="timeline-item reveal">
-
-            <div class="timeline-year">
-                2022
-            </div>
-
-            <h3>
-                The year I failed Grade 10.
-            </h3>
-
-            <p>
-                Failing Grade 10 made me realise that I needed
-                to become better and take my future more seriously.
-                It became one of the moments that pushed me to start
-                changing.
-            </p>
-
-        </div>
-
-        <div class="timeline-item reveal">
-
-            <div class="timeline-year">
-                2022 — 2025
-            </div>
-
-            <h3>
-                Learning to learn.
-            </h3>
-
-            <p>
-                Over the following years, I became increasingly
-                interested in reading, knowledge, and the world
-                beyond what I already knew. I slowly developed
-                a real love for learning.
-            </p>
-
-        </div>
-
-        <div class="timeline-item reveal">
-
-            <div class="timeline-year">
-                2026
-            </div>
-
-            <h3>
-                University.
-            </h3>
-
-            <p>
-                I applied to university late and chose B.Com
-                Accounting at the University of Fort Hare because
-                it was the best course available to me at the time.
-                I am now a first-year student.
-            </p>
-
-        </div>
-
-        <div class="timeline-item reveal">
-
-            <div class="timeline-year">
-                JUNE 2026
-            </div>
-
-            <h3>
-                Discovering technology.
-            </h3>
-
-            <p>
-                Around June 2026, I discovered how much I enjoy
-                Computer Science, coding, and technology. I decided
-                that I would continue learning it on the side while
-                continuing my degree.
-            </p>
-
-        </div>
-
-        <div class="timeline-item reveal">
-
-            <div class="timeline-year">
-                NOW
-            </div>
-
-            <h3>
-                Still moving.
-            </h3>
-
-            <p>
-                I'm proud that I made it this far. I'm learning,
-                building, studying, and trying to understand exactly
-                what I want to become.
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-
-</section>
-
-<!-- =========================
-     THINGS I'VE BUILT
-========================= -->
-
-<section class="section chapter">
-
-<div class="section-inner">
-
-    <div class="section-label">
-        CHAPTER 04 / THINGS I'VE BUILT
-    </div>
-
-    <h2 class="section-title reveal">
-        things<br>
-        i've built<em>.</em>
-    </h2>
-
-    <div class="projects">
-
-        <!-- SUMS -->
-
-        <div class="project reveal">
-
-            <a
-                class="project-link"
-                href="https://sums-streetwear.github.io/sums-streetwear/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-
-                <div class="project-visual">
-                    <span>SUMS</span>
+                <div class="card-tag">
+                    STILL BEING WRITTEN
                 </div>
 
-                <div class="project-info">
+            </div>
 
-                    <div class="project-number">
-                        PROJECT / 001
-                    </div>
+            <div>
+
+                <h2 class="feature-title">
+                    The<br>
+                    <span>Future.</span>
+                </h2>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <footer class="footer">
+
+        <span>
+            BEFORE THE NAME / ARCHIVE 001
+        </span>
+
+        <span>
+            NTSIKELELO / 2026
+        </span>
+
+    </footer>
+
+</main>
+
+
+<!-- ==================================================
+     MODAL — MY BEGINNING
+================================================== -->
+
+<div class="modal" id="beginning">
+
+    <div class="modal-inner">
+
+        <div class="modal-header">
+
+            <div>
+
+                <div class="modal-number">
+                    CHAPTER 01 / 09
+                </div>
+
+                <h2 class="modal-title">
+                    My<br>
+                    Beginning.
+                </h2>
+
+            </div>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-content">
+
+            <div class="info-box full">
+
+                <div class="info-label">
+                    WHERE IT STARTED
+                </div>
+
+                <h3>
+                    Port St Johns, Eastern Cape.
+                </h3>
+
+                <p>
+                    My name is Ntsikelelo, and I come from
+                    Port St Johns in the Eastern Cape. I'm
+                    writing this on Saturday, 16 August 2026,
+                    at 17:31. I suddenly had the idea to create
+                    this documentary for myself — a place to
+                    record where I come from, where I'm going,
+                    and what I want to become.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    WHO I AM
+                </div>
+
+                <h3>
+                    Curious by nature.
+                </h3>
+
+                <p>
+                    I'm a curious person. I love reading,
+                    learning new things and moving differently
+                    from other people.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    MY PERSONALITY
+                </div>
+
+                <h3>
+                    Still becoming.
+                </h3>
+
+                <p>
+                    I used to be quite disorganised and lost.
+                    I didn't always know what I wanted. Today,
+                    I believe I am different from who I was,
+                    and I want to continue becoming different.
+                </p>
+
+            </div>
+
+
+            <div class="info-box full">
+
+                <div class="info-label">
+                    WHERE I'M GOING
+                </div>
+
+                <h3>
+                    I want to build.
+                </h3>
+
+                <p>
+                    I am currently doing B.Com Accounting at
+                    the University of Fort Hare. Computer Science
+                    and coding only became a serious interest for
+                    me around June 2026. I want to continue my
+                    degree while learning technology on the side.
+                    Eventually, I want to own businesses and become
+                    a developer in the coding field.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-bottom">
+
+            <span class="back-text">
+                ARCHIVE / 01
+            </span>
+
+            <span class="back-text">
+                CLOSE ×
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     MODAL — MY STORY
+================================================== -->
+
+<div class="modal" id="story">
+
+    <div class="modal-inner">
+
+        <div class="modal-header">
+
+            <div>
+
+                <div class="modal-number">
+                    CHAPTER 02 / 09
+                </div>
+
+                <h2 class="modal-title">
+                    My<br>
+                    Story.
+                </h2>
+
+            </div>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-content">
+
+            <div class="info-box full">
+
+                <div class="info-label">
+                    CHILDHOOD
+                </div>
+
+                <h3>
+                    Growing up.
+                </h3>
+
+                <p>
+                    Growing up in Port St Johns was not a bad
+                    experience for me. The environment, schools,
+                    clinic, shops and other things were there.
+                    My childhood was good.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    FAMILY
+                </div>
+
+                <h3>
+                    We never had much.
+                </h3>
+
+                <p>
+                    My family never had much financially, but my
+                    parents made sure that my siblings and I had
+                    food, clothes, education and the things we
+                    needed.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    HOME
+                </div>
+
+                <h3>
+                    My family matters.
+                </h3>
+
+                <p>
+                    I love my family a lot. They are the people
+                    I trust more than anyone and anything in this
+                    world.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    WORK
+                </div>
+
+                <h3>
+                    My parents.
+                </h3>
+
+                <p>
+                    My mother used to clean at a local church and
+                    earned around R1,000 a month. My father worked
+                    as a security guard at the school where I was
+                    studying and earned around R1,500.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    CHURCH
+                </div>
+
+                <h3>
+                    A big part of childhood.
+                </h3>
+
+                <p>
+                    My family loved church. We used to go almost
+                    every day, even when we did not feel like going.
+                    It became one of the things that shaped me.
+                </p>
+
+            </div>
+
+
+            <div class="info-box full">
+
+                <div class="info-label">
+                    LESSONS
+                </div>
+
+                <h3>
+                    Mistakes taught me.
+                </h3>
+
+                <p>
+                    I've made many mistakes. The most important
+                    thing for me is that I learned from them.
+                    I've also watched how certain choices affect
+                    people and that has helped me decide what
+                    kind of person I do not want to become.
+                    My past wasn't perfect, but it taught me a lot.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     MODAL — JOURNEY
+================================================== -->
+
+<div class="modal" id="journey">
+
+    <div class="modal-inner">
+
+        <div class="modal-header">
+
+            <div>
+
+                <div class="modal-number">
+                    CHAPTER 03 / 09
+                </div>
+
+                <h2 class="modal-title">
+                    My<br>
+                    Journey.
+                </h2>
+
+            </div>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="timeline">
+
+            <div class="timeline-box">
+
+                <div class="timeline-year">
+                    2022
+                </div>
+
+                <h3>
+                    Failing Grade 10.
+                </h3>
+
+                <p>
+                    I failed Grade 10. It became one of the
+                    moments that made me want to become better
+                    and take my future more seriously.
+                </p>
+
+            </div>
+
+
+            <div class="timeline-box">
+
+                <div class="timeline-year">
+                    2022 — 2025
+                </div>
+
+                <h3>
+                    Learning to learn.
+                </h3>
+
+                <p>
+                    Over the next few years, I started paying
+                    more attention to books and knowledge.
+                    I developed a love for learning and seeking
+                    knowledge.
+                </p>
+
+            </div>
+
+
+            <div class="timeline-box">
+
+                <div class="timeline-year">
+                    JUNE 2026
+                </div>
+
+                <h3>
+                    Discovering coding.
+                </h3>
+
+                <p>
+                    Around June 2026, I discovered how much I
+                    love Computer Science, coding and technology.
+                    This was when that path started becoming
+                    important to me.
+                </p>
+
+            </div>
+
+
+            <div class="timeline-box">
+
+                <div class="timeline-year">
+                    2026
+                </div>
+
+                <h3>
+                    University.
+                </h3>
+
+                <p>
+                    I applied late and had to choose Accounting
+                    because it was the best course available to
+                    me at the time. I got into the University
+                    of Fort Hare and started B.Com Accounting.
+                </p>
+
+            </div>
+
+
+            <div class="timeline-box">
+
+                <div class="timeline-year">
+                    NOW
+                </div>
+
+                <h3>
+                    Still moving.
+                </h3>
+
+                <p>
+                    I am doing well now. I have no regrets about
+                    where I am. I'm proud that I made it this far
+                    and I'm continuing to work towards something
+                    bigger.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     MODAL — BUILT
+================================================== -->
+
+<div class="modal" id="built">
+
+    <div class="modal-inner">
+
+        <div class="modal-header">
+
+            <div>
+
+                <div class="modal-number">
+                    CHAPTER 04 / 09
+                </div>
+
+                <h2 class="modal-title">
+                    Things I've<br>
+                    Built.
+                </h2>
+
+            </div>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="project-grid">
+
+            <!-- SUMS -->
+
+            <div class="project-card">
+
+                <div class="project-symbol">
+                    SUMS
+                </div>
+
+                <div class="project-details">
 
                     <h3>
                         SUMS
@@ -1592,48 +2080,47 @@ footer {
 
                     <p>
                         A website I worked on for my friend
-                        Unathi's clothing brand. Unathi is
-                        the founder of SUMS.
+                        Unathi's clothing brand. Unathi is the
+                        founder of SUMS.
                     </p>
 
-                    <div class="project-open">
-                        OPEN PROJECT →
-                    </div>
+                    <a
+                        href="https://sums-streetwear.github.io/sums-streetwear/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-button"
+                    >
+                        OPEN SUMS →
+                    </a>
 
                 </div>
 
-            </a>
+            </div>
 
-        </div>
 
-        <!-- UNI CIRCLE -->
+            <!-- UNI CIRCLE -->
 
-        <div class="project reveal">
+            <div class="project-card">
 
-            <div class="project-link">
-
-                <div class="project-visual">
-                    <span>UNI CIRCLE</span>
+                <div class="project-symbol">
+                    UNI CIRCLE
                 </div>
 
-                <div class="project-info">
-
-                    <div class="project-number">
-                        PROJECT / 002
-                    </div>
+                <div class="project-details">
 
                     <h3>
                         Uni Circle
                     </h3>
 
                     <p>
-                        A university-focused application I am
-                        currently building and developing.
+                        A university application I am currently
+                        working on. It is part of my journey into
+                        building things with technology.
                     </p>
 
-                    <div class="project-open">
+                    <span class="project-button">
                         CURRENTLY BUILDING
-                    </div>
+                    </span>
 
                 </div>
 
@@ -1645,98 +2132,98 @@ footer {
 
 </div>
 
-</section>
 
-<!-- =========================
-     THINGS I'M BUILDING
-========================= -->
+<!-- ==================================================
+     MODAL — BUILDING
+================================================== -->
 
-<section class="section chapter">
+<div class="modal" id="building">
 
-<div class="section-inner">
+    <div class="modal-inner">
 
-    <div class="section-label">
-        CHAPTER 05 / THINGS I'M BUILDING
-    </div>
+        <div class="modal-header">
 
-    <h2 class="section-title reveal">
-        things<br>
-        i'm building<em>.</em>
-    </h2>
+            <div>
 
-    <div class="cards">
+                <div class="modal-number">
+                    CHAPTER 05 / 09
+                </div>
 
-        <div class="card full reveal">
+                <h2 class="modal-title">
+                    I'm<br>
+                    Building.
+                </h2>
 
-            <div class="card-number">
-                01 — RIGHT NOW
             </div>
 
-            <h3>
-                Learning by building.
-            </h3>
-
-            <p>
-                Right now, I am becoming more interested in creating
-                things with technology. I want to build websites for
-                people, taking their ideas and turning them into
-                something real that they can use. At the same time,
-                I want to create my own applications and eventually
-                have people using things that I came up with myself.
-            </p>
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
 
         </div>
 
-        <div class="card reveal">
 
-            <div class="card-number">
-                02 — WEBSITES
+        <div class="modal-content">
+
+            <div class="info-box full">
+
+                <div class="info-label">
+                    RIGHT NOW
+                </div>
+
+                <h3>
+                    Learning by building.
+                </h3>
+
+                <p>
+                    I want coding to become something I actually
+                    use. I want to create websites for people,
+                    build applications for myself, and eventually
+                    have people using things that started as ideas
+                    in my head.
+                </p>
+
             </div>
 
-            <h3>
-                Building for people.
-            </h3>
 
-            <p>
-                I want to create websites for people and learn how
-                to turn their ideas into something real.
-            </p>
+            <div class="info-box">
 
-        </div>
+                <div class="info-label">
+                    WEBSITES
+                </div>
 
-        <div class="card reveal">
+                <h3>
+                    Building for people.
+                </h3>
 
-            <div class="card-number">
-                03 — APPS
+                <p>
+                    I want to create websites for people and
+                    learn how to take their ideas and turn them
+                    into something real.
+                </p>
+
             </div>
 
-            <h3>
-                Building my own ideas.
-            </h3>
 
-            <p>
-                I want to create applications from my own ideas
-                and eventually have people using them.
-            </p>
+            <div class="info-box">
 
-        </div>
+                <div class="info-label">
+                    APPLICATIONS
+                </div>
 
-        <div class="card full reveal">
+                <h3>
+                    Building my ideas.
+                </h3>
 
-            <div class="card-number">
-                04 — THE DIRECTION
+                <p>
+                    I want to create applications from my own
+                    ideas and eventually have people using them.
+                </p>
+
             </div>
-
-            <h3>
-                I want to build.
-            </h3>
-
-            <p>
-                I don't want coding to remain something I only learn
-                about. I want to actually build with it and keep
-                creating websites, applications, and eventually
-                businesses around the things I create.
-            </p>
 
         </div>
 
@@ -1744,78 +2231,119 @@ footer {
 
 </div>
 
-</section>
 
-<!-- =========================
-     STATEMENT
-========================= -->
+<!-- ==================================================
+     MODAL — MIND
+================================================== -->
 
-<section class="statement chapter">
+<div class="modal" id="mind">
 
-    <div class="statement-text reveal">
+    <div class="modal-inner">
 
-        I don't want to only<br>
+        <div class="modal-header">
 
-        <span>learn.</span><br>
+            <div>
 
-        I want to build.
+                <div class="modal-number">
+                    CHAPTER 06 / 09
+                </div>
 
-    </div>
+                <h2 class="modal-title">
+                    My<br>
+                    Mind.
+                </h2>
 
-</section>
+            </div>
 
-<!-- =========================
-     THINGS I WANT TO CREATE
-========================= -->
-
-<section class="section chapter">
-
-<div class="section-inner">
-
-    <div class="section-label">
-        CHAPTER 06 / THINGS I WANT TO CREATE
-    </div>
-
-    <h2 class="section-title reveal">
-        things i<br>
-        want to create<em>.</em>
-    </h2>
-
-    <div class="idea-grid">
-
-        <div class="idea reveal">
-
-            <small>
-                IDEA / 01
-            </small>
-
-            <h3>
-                Websites
-            </h3>
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
 
         </div>
 
-        <div class="idea reveal">
 
-            <small>
-                IDEA / 02
-            </small>
+        <div class="modal-content">
 
-            <h3>
-                Applications
-            </h3>
+            <div class="info-box full">
 
-        </div>
+                <div class="info-label">
+                    CURIOSITY
+                </div>
 
-        <div class="idea reveal">
+                <h3>
+                    I want to know more.
+                </h3>
 
-            <small>
-                IDEA / 03
-            </small>
+                <p>
+                    I love reading and learning new things.
+                    The more I learn, the more curious I become.
+                    I don't consider myself a genius. I consider
+                    myself someone who is willing to work and
+                    continue learning.
+                </p>
 
-            <h3>
-                Businesses
-            </h3>
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    CHANGE
+                </div>
+
+                <h3>
+                    I became different.
+                </h3>
+
+                <p>
+                    I used to be lost and quite disorganised.
+                    Over time, I started understanding myself
+                    better and became more intentional about
+                    where I was going.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    DIFFERENT
+                </div>
+
+                <h3>
+                    I want to move differently.
+                </h3>
+
+                <p>
+                    I don't want to simply follow the same path
+                    as everyone else. I want to become my own
+                    person and build something that belongs to me.
+                </p>
+
+            </div>
+
+
+            <div class="info-box full">
+
+                <div class="info-label">
+                    HOME
+                </div>
+
+                <h3>
+                    I love staying indoors.
+                </h3>
+
+                <p>
+                    Even when I am not doing anything, I enjoy
+                    being indoors. I enjoy having time to think,
+                    learn and explore things that interest me.
+                </p>
+
+            </div>
 
         </div>
 
@@ -1823,158 +2351,96 @@ footer {
 
 </div>
 
-</section>
 
-<!-- =========================
-     MY MIND
-========================= -->
+<!-- ==================================================
+     MODAL — DREAMS
+================================================== -->
 
-<section class="section chapter">
+<div class="modal" id="dreams">
 
-<div class="section-inner">
+    <div class="modal-inner">
 
-    <div class="section-label">
-        CHAPTER 07 / MY MIND
-    </div>
+        <div class="modal-header">
 
-    <h2 class="section-title reveal">
-        my<br>
-        mind<em>.</em>
-    </h2>
+            <div>
 
-    <div class="cards">
+                <div class="modal-number">
+                    CHAPTER 07 / 09
+                </div>
 
-        <div class="card full reveal">
+                <h2 class="modal-title">
+                    My<br>
+                    Dreams.
+                </h2>
 
-            <div class="card-number">
-                01 — CURRENTLY
             </div>
 
-            <h3>
-                Always learning.
-            </h3>
-
-            <p>
-                I am still learning how to understand myself,
-                technology, business, and the world around me.
-                I don't know everything, and I don't think I ever
-                will. But I enjoy knowing that there is always
-                something new to discover.
-            </p>
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
 
         </div>
 
-        <div class="card reveal">
 
-            <div class="card-number">
-                02 — CURIOSITY
+        <div class="modal-content">
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    BUSINESS
+                </div>
+
+                <h3>
+                    Own businesses.
+                </h3>
+
+                <p>
+                    I want to own businesses and build things
+                    that create opportunities.
+                </p>
+
             </div>
 
-            <h3>
-                I want to know more.
-            </h3>
 
-            <p>
-                The more I learn, the more curious I become.
-                There is always another subject, another idea,
-                or another skill to explore.
-            </p>
+            <div class="info-box">
 
-        </div>
+                <div class="info-label">
+                    TECHNOLOGY
+                </div>
 
-        <div class="card reveal">
+                <h3>
+                    Become a developer.
+                </h3>
 
-            <div class="card-number">
-                03 — DIFFERENT
+                <p>
+                    I want to become a developer and build useful
+                    things through coding and technology.
+                </p>
+
             </div>
 
-            <h3>
-                I want to move differently.
-            </h3>
 
-            <p>
-                I don't want to simply follow the same path as
-                everyone else. I want to become my own person and
-                build a life that feels true to me.
-            </p>
+            <div class="info-box full">
 
-        </div>
+                <div class="info-label">
+                    FAMILY
+                </div>
 
-    </div>
+                <h3>
+                    Change my family's situation.
+                </h3>
 
-</div>
+                <p>
+                    My family has never had much financially.
+                    One of my biggest motivations is to work
+                    towards changing that and creating a better
+                    future for myself and my family.
+                </p>
 
-</section>
-
-<!-- =========================
-     MY DREAMS
-========================= -->
-
-<section class="section chapter">
-
-<div class="section-inner">
-
-    <div class="section-label">
-        CHAPTER 08 / MY DREAMS
-    </div>
-
-    <h2 class="section-title reveal">
-        my<br>
-        dreams<em>.</em>
-    </h2>
-
-    <div class="cards">
-
-        <div class="card reveal">
-
-            <div class="card-number">
-                01 — BUSINESS
             </div>
-
-            <h3>
-                Own businesses.
-            </h3>
-
-            <p>
-                I want to build and own businesses and create
-                something that can change the situation I come from.
-            </p>
-
-        </div>
-
-        <div class="card reveal">
-
-            <div class="card-number">
-                02 — TECHNOLOGY
-            </div>
-
-            <h3>
-                Become a developer.
-            </h3>
-
-            <p>
-                I want to become a developer and build useful
-                things through coding and technology.
-            </p>
-
-        </div>
-
-        <div class="card full reveal">
-
-            <div class="card-number">
-                03 — FAMILY
-            </div>
-
-            <h3>
-                Change where I come from.
-            </h3>
-
-            <p>
-                I come from a family that has never had much
-                financially. One of my biggest motivations is to
-                work towards changing that and creating a better
-                future for myself and my family.
-            </p>
 
         </div>
 
@@ -1982,96 +2448,327 @@ footer {
 
 </div>
 
-</section>
 
-<!-- =========================
-     FUTURE
-========================= -->
+<!-- ==================================================
+     MODAL — THINGS I WANT
+================================================== -->
 
-<section class="future chapter">
+<div class="modal" id="create">
 
-<div>
+    <div class="modal-inner">
 
-    <div class="future-small">
-        CHAPTER 09 / STILL BEING WRITTEN
+        <div class="modal-header">
+
+            <div>
+
+                <div class="modal-number">
+                    CHAPTER 08 / 09
+                </div>
+
+                <h2 class="modal-title">
+                    Things I<br>
+                    Want.
+                </h2>
+
+            </div>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="project-grid">
+
+            <div class="project-card">
+
+                <div class="project-symbol">
+                    WEB
+                </div>
+
+                <div class="project-details">
+
+                    <h3>
+                        Websites
+                    </h3>
+
+                    <p>
+                        I want to create websites for people,
+                        brands and ideas.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="project-card">
+
+                <div class="project-symbol">
+                    APP
+                </div>
+
+                <div class="project-details">
+
+                    <h3>
+                        Applications
+                    </h3>
+
+                    <p>
+                        I want to create applications that people
+                        can actually use.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="project-card">
+
+                <div class="project-symbol">
+                    BUSINESS
+                </div>
+
+                <div class="project-details">
+
+                    <h3>
+                        Businesses
+                    </h3>
+
+                    <p>
+                        Eventually, I want to turn ideas into
+                        businesses and build something of my own.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="project-card">
+
+                <div class="project-symbol">
+                    IDEAS
+                </div>
+
+                <div class="project-details">
+
+                    <h3>
+                        More ideas.
+                    </h3>
+
+                    <p>
+                        There are things I haven't even thought
+                        of yet. That's part of the journey.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-
-    <h2 class="future-title">
-        the<br>
-        future.
-    </h2>
-
-    <p class="future-description">
-        I don't know exactly what the future will look like.
-        I only know that this is not the finished version of me.
-    </p>
 
 </div>
 
-</section>
 
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- ==================================================
+     MODAL — FUTURE
+================================================== -->
 
-<footer>
+<div class="modal" id="future">
 
-    <div class="footer-logo">
+    <div class="modal-inner">
 
-        <img
-            src="logo.png"
-            alt="Before The Name"
-        >
+        <div class="modal-header">
 
-        BEFORE THE NAME
+            <div>
+
+                <div class="modal-number">
+                    CHAPTER 09 / 09
+                </div>
+
+                <h2 class="modal-title">
+                    The<br>
+                    Future.
+                </h2>
+
+            </div>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-content">
+
+            <div class="info-box full">
+
+                <div class="info-label">
+                    STILL BEING WRITTEN
+                </div>
+
+                <h3>
+                    I don't know everything yet.
+                </h3>
+
+                <p>
+                    I don't know exactly what my future will look
+                    like. I know that I want to build businesses,
+                    become a developer, learn more, create things,
+                    help my family and become someone I can be
+                    proud of.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    TODAY
+                </div>
+
+                <h3>
+                    I'm proud I made it here.
+                </h3>
+
+                <p>
+                    I have no regrets about my journey. Everything
+                    that happened brought me to this point.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    TOMORROW
+                </div>
+
+                <h3>
+                    Keep moving.
+                </h3>
+
+                <p>
+                    I am still learning. Still building.
+                    Still becoming.
+                </p>
+
+            </div>
+
+
+            <div class="info-box full">
+
+                <div class="info-label">
+                    FINAL NOTE
+                </div>
+
+                <h3>
+                    All the best to me.
+                </h3>
+
+                <p>
+                    This is only the beginning of the archive.
+                    There is still a lot of life left to document.
+                </p>
+
+            </div>
+
+        </div>
 
     </div>
 
-    <div>
-        ARCHIVE 001 / 2026
-    </div>
+</div>
 
-</footer>
 
 <script>
 
 /* =========================
-   CURSOR
+   OPEN MODAL
 ========================= */
 
-const cursor =
-    document.querySelector(".cursor");
+function openModal(id) {
+
+    document
+        .querySelectorAll(".modal")
+        .forEach(modal => {
+            modal.classList.remove("active");
+        });
+
+    const modal =
+        document.getElementById(id);
+
+    if (!modal) return;
+
+    modal.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+}
+
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+function closeModal() {
+
+    document
+        .querySelectorAll(".modal")
+        .forEach(modal => {
+            modal.classList.remove("active");
+        });
+
+    document.body.style.overflow = "";
+}
+
+
+/* =========================
+   ESCAPE KEY
+========================= */
 
 document.addEventListener(
-    "mousemove",
-    event => {
+    "keydown",
+    function(event) {
 
-        cursor.style.left =
-            event.clientX + "px";
-
-        cursor.style.top =
-            event.clientY + "px";
+        if (event.key === "Escape") {
+            closeModal();
+        }
 
     }
 );
 
+
+/* =========================
+   CLICK OUTSIDE
+========================= */
+
 document
-    .querySelectorAll(
-        "a, .card, .project, .idea"
-    )
-    .forEach(element => {
+    .querySelectorAll(".modal")
+    .forEach(modal => {
 
-        element.addEventListener(
-            "mouseenter",
-            () => {
-                cursor.classList.add("big");
-            }
-        );
+        modal.addEventListener(
+            "click",
+            function(event) {
 
-        element.addEventListener(
-            "mouseleave",
-            () => {
-                cursor.classList.remove("big");
+                if (
+                    event.target === modal
+                ) {
+                    closeModal();
+                }
+
             }
         );
 
@@ -2079,145 +2776,57 @@ document
 
 
 /* =========================
-   SCROLL REVEALS
+   MOVING BACKGROUND GLOW
 ========================= */
 
-const revealObserver =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (
-                    entry.isIntersecting
-                ) {
-
-                    entry.target
-                        .classList
-                        .add("visible");
-
-                    revealObserver
-                        .unobserve(
-                            entry.target
-                        );
-
-                }
-
-            });
-
-        },
-        {
-            threshold: .12
-        }
-    );
-
-document
-    .querySelectorAll(".reveal")
-    .forEach(element => {
-
-        revealObserver.observe(element);
-
-    });
-
-
-/* =========================
-   CHAPTER DOTS
-========================= */
-
-const chapters =
-    document.querySelectorAll(".chapter");
-
-const dots =
-    document.querySelectorAll(
-        ".chapter-nav span"
-    );
-
-const chapterObserver =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (
-                    entry.isIntersecting
-                ) {
-
-                    const index =
-                        Array.from(
-                            chapters
-                        ).indexOf(
-                            entry.target
-                        );
-
-                    dots.forEach(dot => {
-                        dot.classList
-                            .remove("active");
-                    });
-
-                    if (dots[index]) {
-
-                        dots[index]
-                            .classList
-                            .add("active");
-
-                    }
-
-                }
-
-            });
-
-        },
-        {
-            threshold: .45
-        }
-    );
-
-chapters.forEach(chapter => {
-
-    chapterObserver.observe(
-        chapter
-    );
-
-});
-
-
-/* =========================
-   MOVING GLOW
-========================= */
-
-window.addEventListener(
+document.addEventListener(
     "mousemove",
-    event => {
+    function(event) {
 
         const x =
             (
                 event.clientX /
                 window.innerWidth -
                 .5
-            ) * 40;
+            ) * 45;
 
         const y =
             (
                 event.clientY /
                 window.innerHeight -
                 .5
-            ) * 40;
+            ) * 45;
 
-        document.querySelector(
-            ".glow"
-        ).style.transform =
-            `translate(calc(-50% + ${x}px), ${y}px)`;
+        const glow =
+            document.querySelector(".glow");
+
+        glow.style.transform =
+            `translate(
+                calc(-50% + ${x}px),
+                ${y}px
+            )`;
 
     }
 );
 
 
 /* =========================
-   CONSOLE
+   REMOVE LOADER FROM TAB
+   AFTER ANIMATION
 ========================= */
 
-console.log(
-    "BEFORE THE NAME — ARCHIVE 001"
+setTimeout(
+    function() {
+
+        const loader =
+            document.querySelector(".loader");
+
+        if (loader) {
+            loader.style.pointerEvents = "none";
+        }
+
+    },
+    3300
 );
 
 </script>
