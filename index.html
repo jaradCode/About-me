@@ -26,9 +26,9 @@ body {
     font-family: Manrope, Arial, sans-serif;
 }
 
-/* =========================================================
-   OPENING
-========================================================= */
+/* =========================
+   INTRO
+========================= */
 
 .intro {
     position: fixed;
@@ -43,9 +43,11 @@ body {
 }
 
 .intro img {
-    width: min(260px, 55vw);
-    max-height: 180px;
+    width: min(360px, 65vw);
+    height: auto;
+    max-height: 220px;
     object-fit: contain;
+    display: block;
     opacity: 0;
     animation: logoReveal 1.5s ease forwards;
 }
@@ -56,6 +58,7 @@ body {
         transform: scale(.92);
         filter: blur(12px);
     }
+
     100% {
         opacity: 1;
         transform: scale(1);
@@ -68,6 +71,7 @@ body {
         opacity: 1;
         visibility: visible;
     }
+
     100% {
         opacity: 0;
         visibility: hidden;
@@ -75,20 +79,27 @@ body {
     }
 }
 
-/* =========================================================
+/* =========================
    BACKGROUND
-========================================================= */
+========================= */
 
 .grid {
     position: fixed;
     inset: 0;
     z-index: -5;
     opacity: .14;
+
     background-image:
         linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+
     background-size: 70px 70px;
-    mask-image: linear-gradient(to bottom, black, transparent 90%);
+
+    mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 90%
+    );
 }
 
 .glow {
@@ -111,12 +122,14 @@ body {
     pointer-events: none;
     z-index: 9998;
     opacity: .035;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* =========================================================
+/* =========================
    CURSOR
-========================================================= */
+========================= */
 
 .cursor {
     position: fixed;
@@ -127,6 +140,7 @@ body {
     pointer-events: none;
     z-index: 10001;
     transform: translate(-50%, -50%);
+
     transition:
         width .2s ease,
         height .2s ease,
@@ -139,22 +153,27 @@ body {
     background: rgba(255,255,255,.06);
 }
 
-/* =========================================================
+/* =========================
    NAV
-========================================================= */
+========================= */
 
 .nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+
     height: 90px;
     padding: 0 45px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     z-index: 900;
+
     border-bottom: 1px solid rgba(255,255,255,.07);
+
     background: rgba(5,5,5,.58);
     backdrop-filter: blur(18px);
 }
@@ -162,13 +181,14 @@ body {
 .logo-small {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
 }
 
 .logo-small img {
-    width: 45px;
-    height: 45px;
+    width: 58px;
+    height: 58px;
     object-fit: contain;
+    display: block;
 }
 
 .logo-name {
@@ -182,6 +202,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+
     font-family: "DM Mono", monospace;
     font-size: 8px;
     letter-spacing: 2px;
@@ -193,24 +214,33 @@ body {
     height: 5px;
     background: white;
     border-radius: 50%;
+
     animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-    0%,100% { opacity: .3; }
-    50% { opacity: 1; }
+    0%,100% {
+        opacity: .3;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
 
-/* =========================================================
-   SIDE CHAPTERS
-========================================================= */
+/* =========================
+   CHAPTER NAV
+========================= */
 
 .chapter-nav {
     position: fixed;
     right: 35px;
     top: 50%;
+
     transform: translateY(-50%);
+
     z-index: 500;
+
     display: flex;
     flex-direction: column;
     gap: 13px;
@@ -219,49 +249,65 @@ body {
 .chapter-nav span {
     width: 5px;
     height: 5px;
+
     border-radius: 50%;
+
     background: #444;
+
     transition: .35s;
 }
 
 .chapter-nav span.active {
     background: white;
-    box-shadow: 0 0 12px rgba(255,255,255,.7);
+
+    box-shadow:
+        0 0 12px rgba(255,255,255,.7);
+
     transform: scale(1.8);
 }
 
-/* =========================================================
+/* =========================
    HERO
-========================================================= */
+========================= */
 
 .hero {
     min-height: 100vh;
+
     position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     overflow: hidden;
 }
 
 .hero-content {
     width: 90%;
     max-width: 1400px;
+
     position: relative;
     z-index: 2;
 }
 
 .hero-meta {
     font-family: "DM Mono", monospace;
+
     font-size: 8px;
     letter-spacing: 4px;
+
     color: #666;
+
     margin-bottom: 35px;
 }
 
 .hero-title {
     font-size: clamp(75px, 14vw, 200px);
+
     line-height: .78;
+
     letter-spacing: -10px;
+
     font-weight: 300;
 }
 
@@ -271,7 +317,12 @@ body {
 
 .hero-title span {
     display: block;
-    animation: titleIn 1.5s cubic-bezier(.2,.8,.2,1) forwards;
+
+    animation:
+        titleIn 1.5s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+
     transform: translateY(110%);
 }
 
@@ -287,70 +338,96 @@ body {
 
 .hero-subtitle {
     margin-top: 50px;
+
     max-width: 470px;
+
     font-size: 14px;
     line-height: 1.7;
+
     color: #858585;
 }
 
 .hero-date {
     position: absolute;
+
     right: 0;
     bottom: 10px;
+
     font-family: "DM Mono", monospace;
+
     font-size: 8px;
     letter-spacing: 3px;
+
     color: #555;
 }
 
 .scroll {
     position: absolute;
+
     bottom: 35px;
     left: 50%;
+
     transform: translateX(-50%);
+
     font-family: "DM Mono", monospace;
+
     font-size: 7px;
     letter-spacing: 4px;
+
     color: #555;
 }
 
 .scroll::after {
     content: "";
+
     display: block;
+
     width: 1px;
     height: 35px;
+
     background: #555;
+
     margin: 12px auto 0;
 }
 
-/* =========================================================
-   GENERAL SECTIONS
-========================================================= */
+/* =========================
+   SECTIONS
+========================= */
 
 .section {
     min-height: 100vh;
+
     padding: 160px 9%;
+
     position: relative;
 }
 
 .section-inner {
     max-width: 1250px;
+
     margin: auto;
 }
 
 .section-label {
     font-family: "DM Mono", monospace;
+
     font-size: 8px;
     letter-spacing: 4px;
+
     color: #555;
+
     margin-bottom: 25px;
 }
 
 .section-title {
     font-size: clamp(65px, 10vw, 145px);
+
     font-weight: 300;
+
     line-height: .8;
+
     letter-spacing: -8px;
+
     margin-bottom: 80px;
 }
 
@@ -359,49 +436,73 @@ body {
     color: #555;
 }
 
-/* =========================================================
-   GLASS CARDS
-========================================================= */
+/* =========================
+   CARDS
+========================= */
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
     gap: 18px;
 }
 
 .card {
     position: relative;
+
     padding: 35px;
+
     min-height: 280px;
-    border: 1px solid rgba(255,255,255,.09);
-    background: linear-gradient(
-        135deg,
-        rgba(255,255,255,.055),
-        rgba(255,255,255,.012)
-    );
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.012)
+        );
+
     backdrop-filter: blur(16px);
+
     overflow: hidden;
+
     transition:
-        transform .5s cubic-bezier(.2,.8,.2,1),
+        transform .5s
+        cubic-bezier(.2,.8,.2,1),
         border-color .4s ease;
 }
 
 .card::before {
     content: "";
+
     position: absolute;
+
     width: 160px;
     height: 160px;
+
     top: -100px;
     right: -100px;
+
     border-radius: 50%;
-    background: rgba(255,255,255,.06);
+
+    background:
+        rgba(255,255,255,.06);
+
     filter: blur(30px);
+
     transition: .5s;
 }
 
 .card:hover {
     transform: translateY(-7px);
-    border-color: rgba(255,255,255,.25);
+
+    border-color:
+        rgba(255,255,255,.25);
 }
 
 .card:hover::before {
@@ -414,202 +515,344 @@ body {
 
 .card-number {
     font-family: "DM Mono", monospace;
+
     font-size: 8px;
+
     letter-spacing: 3px;
+
     color: #555;
+
     margin-bottom: 40px;
 }
 
 .card h3 {
     font-size: 29px;
+
     font-weight: 300;
+
     margin-bottom: 20px;
 }
 
 .card p {
     color: #929292;
+
     font-size: 15px;
+
     line-height: 1.8;
+
     max-width: 900px;
 }
 
-/* =========================================================
+/* =========================
    TIMELINE
-========================================================= */
+========================= */
 
 .timeline {
     position: relative;
-    border-left: 1px solid #292929;
+
+    border-left:
+        1px solid #292929;
+
     margin-left: 20px;
 }
 
 .timeline-item {
     position: relative;
-    padding: 0 0 65px 60px;
+
+    padding:
+        0 0 65px 60px;
 }
 
 .timeline-item::before {
     content: "";
+
     position: absolute;
+
     left: -4px;
     top: 5px;
+
     width: 7px;
     height: 7px;
+
     border-radius: 50%;
+
     background: #777;
-    box-shadow: 0 0 0 6px #050505;
+
+    box-shadow:
+        0 0 0 6px #050505;
 }
 
 .timeline-year {
     font-family: "DM Mono", monospace;
+
     font-size: 9px;
+
     letter-spacing: 3px;
+
     color: #666;
+
     margin-bottom: 15px;
 }
 
 .timeline-item h3 {
     font-size: 35px;
+
     font-weight: 300;
+
     margin-bottom: 15px;
 }
 
 .timeline-item p {
     color: #888;
+
     font-size: 15px;
+
     line-height: 1.75;
+
     max-width: 800px;
 }
 
-/* =========================================================
+/* =========================
    PROJECTS
-========================================================= */
+========================= */
 
 .projects {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
     gap: 20px;
 }
 
 .project {
     min-height: 420px;
-    border: 1px solid rgba(255,255,255,.1);
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
     background: #0b0b0b;
+
     overflow: hidden;
+
     transition: .6s;
 }
 
 .project:hover {
     transform: translateY(-8px);
-    border-color: rgba(255,255,255,.3);
+
+    border-color:
+        rgba(255,255,255,.3);
+}
+
+.project-link {
+    display: block;
+
+    height: 100%;
+
+    color: inherit;
+
+    text-decoration: none;
 }
 
 .project-visual {
     height: 255px;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
+
     position: relative;
+
     overflow: hidden;
+
     background:
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.03) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            rgba(255,255,255,.03) 1px,
+            transparent 1px
+        ),
         #111;
+
     background-size: 35px 35px;
 }
 
 .project-visual::after {
     content: "";
+
     position: absolute;
+
     width: 250px;
     height: 250px;
-    border: 1px solid rgba(255,255,255,.15);
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
     border-radius: 50%;
-    animation: rotate 12s linear infinite;
+
+    animation:
+        rotate 12s
+        linear
+        infinite;
 }
 
 .project-visual span {
     font-family: "DM Mono", monospace;
+
     font-size: 11px;
+
     letter-spacing: 6px;
+
     z-index: 2;
 }
 
 @keyframes rotate {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .project-info {
     padding: 30px;
 }
 
+.project-number {
+    font-family: "DM Mono", monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    color: #555;
+
+    margin-bottom: 15px;
+}
+
 .project-info h3 {
     font-size: 32px;
+
     font-weight: 300;
+
     margin-bottom: 10px;
 }
 
 .project-info p {
     color: #777;
+
     line-height: 1.6;
+
     font-size: 14px;
 }
 
-/* =========================================================
+.project-open {
+    margin-top: 25px;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    color: #777;
+
+    transition: .3s ease;
+}
+
+.project:hover .project-open {
+    color: white;
+
+    letter-spacing: 5px;
+}
+
+/* =========================
    IDEAS
-========================================================= */
+========================= */
 
 .idea-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
     gap: 15px;
 }
 
 .idea {
     min-height: 270px;
+
     padding: 30px;
-    border: 1px solid rgba(255,255,255,.09);
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
     display: flex;
+
     flex-direction: column;
+
     justify-content: space-between;
-    background: rgba(255,255,255,.015);
+
+    background:
+        rgba(255,255,255,.015);
+
     transition: .5s;
 }
 
 .idea:hover {
-    background: rgba(255,255,255,.055);
+    background:
+        rgba(255,255,255,.055);
+
     transform: translateY(-7px);
 }
 
 .idea small {
     font-family: "DM Mono", monospace;
+
     font-size: 8px;
+
     color: #555;
+
     letter-spacing: 3px;
 }
 
 .idea h3 {
     font-size: 32px;
+
     font-weight: 300;
 }
 
-/* =========================================================
-   BIG STATEMENT
-========================================================= */
+/* =========================
+   STATEMENT
+========================= */
 
 .statement {
     min-height: 80vh;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
+
     text-align: center;
+
     padding: 120px 8%;
 }
 
 .statement-text {
-    font-size: clamp(50px, 9vw, 130px);
+    font-size:
+        clamp(50px, 9vw, 130px);
+
     line-height: .9;
+
     font-weight: 300;
+
     letter-spacing: -7px;
 }
 
@@ -617,91 +860,127 @@ body {
     color: #4d4d4d;
 }
 
-/* =========================================================
+/* =========================
    FUTURE
-========================================================= */
+========================= */
 
 .future {
     min-height: 110vh;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
+
     text-align: center;
+
     position: relative;
 }
 
 .future-small {
     font-family: "DM Mono", monospace;
+
     font-size: 8px;
+
     letter-spacing: 5px;
+
     color: #555;
+
     margin-bottom: 45px;
 }
 
 .future-title {
-    font-size: clamp(75px, 15vw, 190px);
+    font-size:
+        clamp(75px, 15vw, 190px);
+
     font-weight: 300;
+
     line-height: .75;
+
     letter-spacing: -11px;
 }
 
 .future-description {
     max-width: 450px;
-    margin: 55px auto 0;
+
+    margin:
+        55px auto 0;
+
     color: #666;
+
     line-height: 1.7;
+
     font-size: 14px;
 }
 
-/* =========================================================
+/* =========================
    FOOTER
-========================================================= */
+========================= */
 
 footer {
     min-height: 180px;
+
     padding: 50px 8%;
-    border-top: 1px solid rgba(255,255,255,.08);
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
+
     display: flex;
+
     justify-content: space-between;
     align-items: center;
+
     color: #444;
+
     font-family: "DM Mono", monospace;
+
     font-size: 8px;
+
     letter-spacing: 3px;
 }
 
 .footer-logo {
     display: flex;
+
     align-items: center;
+
     gap: 15px;
 }
 
 .footer-logo img {
-    width: 38px;
-    height: 38px;
+    width: 48px;
+    height: 48px;
+
     object-fit: contain;
+
+    display: block;
 }
 
-/* =========================================================
-   REVEAL ANIMATION
-========================================================= */
+/* =========================
+   REVEALS
+========================= */
 
 .reveal {
     opacity: 0;
+
     transform: translateY(45px);
+
     transition:
         opacity 1s ease,
-        transform 1s cubic-bezier(.2,.8,.2,1);
+        transform 1s
+        cubic-bezier(.2,.8,.2,1);
 }
 
 .reveal.visible {
     opacity: 1;
+
     transform: translateY(0);
 }
 
-/* =========================================================
+/* =========================
    MOBILE
-========================================================= */
+========================= */
 
 @media (max-width: 800px) {
 
@@ -711,12 +990,14 @@ footer {
 
     .nav {
         height: 70px;
-        padding: 0 20px;
+
+        padding:
+            0 20px;
     }
 
     .logo-small img {
-        width: 35px;
-        height: 35px;
+        width: 48px;
+        height: 48px;
     }
 
     .chapter-nav {
@@ -729,6 +1010,7 @@ footer {
 
     .hero-title {
         font-size: 70px;
+
         letter-spacing: -5px;
     }
 
@@ -738,16 +1020,20 @@ footer {
 
     .hero-date {
         position: static;
+
         margin-top: 35px;
     }
 
     .section {
-        padding: 110px 6%;
+        padding:
+            110px 6%;
     }
 
     .section-title {
         font-size: 68px;
+
         letter-spacing: -5px;
+
         margin-bottom: 55px;
     }
 
@@ -762,6 +1048,7 @@ footer {
 
     .card {
         padding: 27px;
+
         min-height: 0;
     }
 
@@ -795,18 +1082,23 @@ footer {
 
     .statement-text {
         font-size: 55px;
+
         letter-spacing: -4px;
     }
 
     .future-title {
         font-size: 75px;
+
         letter-spacing: -6px;
     }
 
     footer {
         flex-direction: column;
+
         gap: 30px;
+
         justify-content: center;
+
         text-align: center;
     }
 }
@@ -815,12 +1107,15 @@ footer {
 
 <body>
 
-<!-- =====================================================
-     OPENING LOGO
-===================================================== -->
+<!-- =========================
+     INTRO LOGO
+========================= -->
 
 <div class="intro">
-    <img src="logo.png" alt="Before The Name">
+    <img
+        src="logo.png"
+        alt="Before The Name"
+    >
 </div>
 
 <div class="grid"></div>
@@ -829,31 +1124,41 @@ footer {
 
 <div class="cursor"></div>
 
-<!-- =====================================================
-     NAVIGATION
-===================================================== -->
+<!-- =========================
+     NAV
+========================= -->
 
 <nav class="nav">
 
     <div class="logo-small">
-        <img src="logo.png" alt="Before The Name">
+
+        <img
+            src="logo.png"
+            alt="Before The Name"
+        >
+
         <div class="logo-name">
             BEFORE THE NAME
         </div>
+
     </div>
 
     <div class="nav-status">
+
         <span class="status-dot"></span>
+
         STILL BECOMING
+
     </div>
 
 </nav>
 
-<!-- =====================================================
-     CHAPTER NAVIGATION
-===================================================== -->
+<!-- =========================
+     CHAPTER DOTS
+========================= -->
 
 <div class="chapter-nav">
+
     <span class="active"></span>
     <span></span>
     <span></span>
@@ -863,11 +1168,12 @@ footer {
     <span></span>
     <span></span>
     <span></span>
+
 </div>
 
-<!-- =====================================================
+<!-- =========================
      HERO
-===================================================== -->
+========================= -->
 
 <section class="hero chapter">
 
@@ -878,8 +1184,15 @@ footer {
         </div>
 
         <h1 class="hero-title">
-            <div><span>this</span></div>
-            <div><span>is me.</span></div>
+
+            <div>
+                <span>this</span>
+            </div>
+
+            <div>
+                <span>is me.</span>
+            </div>
+
         </h1>
 
         <p class="hero-subtitle">
@@ -900,15 +1213,17 @@ footer {
 
 </section>
 
-<!-- =====================================================
+<!-- =========================
      MY BEGINNING
-===================================================== -->
+========================= -->
 
 <section class="section chapter">
 
 <div class="section-inner">
 
-    <div class="section-label">CHAPTER 01 / MY BEGINNING</div>
+    <div class="section-label">
+        CHAPTER 01 / MY BEGINNING
+    </div>
 
     <h2 class="section-title reveal">
         my<br>
@@ -919,9 +1234,13 @@ footer {
 
         <div class="card full reveal">
 
-            <div class="card-number">01 — WHERE IT STARTED</div>
+            <div class="card-number">
+                01 — WHERE IT STARTED
+            </div>
 
-            <h3>This is where I begin.</h3>
+            <h3>
+                This is where I begin.
+            </h3>
 
             <p>
                 My name is Ntsikelelo, and I come from Port St Johns
@@ -936,9 +1255,13 @@ footer {
 
         <div class="card reveal">
 
-            <div class="card-number">02 — WHO I AM</div>
+            <div class="card-number">
+                02 — WHO I AM
+            </div>
 
-            <h3>Curious by nature.</h3>
+            <h3>
+                Curious by nature.
+            </h3>
 
             <p>
                 I'm a curious person who loves reading, learning new
@@ -952,9 +1275,13 @@ footer {
 
         <div class="card reveal">
 
-            <div class="card-number">03 — TODAY</div>
+            <div class="card-number">
+                03 — TODAY
+            </div>
 
-            <h3>Still becoming.</h3>
+            <h3>
+                Still becoming.
+            </h3>
 
             <p>
                 I'm currently a first-year B.Com Accounting student
@@ -968,9 +1295,13 @@ footer {
 
         <div class="card full reveal">
 
-            <div class="card-number">04 — WHERE I'M GOING</div>
+            <div class="card-number">
+                04 — WHERE I'M GOING
+            </div>
 
-            <h3>I want to build.</h3>
+            <h3>
+                I want to build.
+            </h3>
 
             <p>
                 Around June 2026, I discovered how much I enjoy
@@ -988,15 +1319,17 @@ footer {
 
 </section>
 
-<!-- =====================================================
+<!-- =========================
      MY STORY
-===================================================== -->
+========================= -->
 
 <section class="section chapter">
 
 <div class="section-inner">
 
-    <div class="section-label">CHAPTER 02 / MY STORY</div>
+    <div class="section-label">
+        CHAPTER 02 / MY STORY
+    </div>
 
     <h2 class="section-title reveal">
         my<br>
@@ -1007,9 +1340,13 @@ footer {
 
         <div class="card full reveal">
 
-            <div class="card-number">01 — HOME</div>
+            <div class="card-number">
+                01 — HOME
+            </div>
 
-            <h3>Port St Johns.</h3>
+            <h3>
+                Port St Johns.
+            </h3>
 
             <p>
                 Growing up in Port St Johns was not a bad experience
@@ -1025,9 +1362,13 @@ footer {
 
         <div class="card reveal">
 
-            <div class="card-number">02 — FAMILY</div>
+            <div class="card-number">
+                02 — FAMILY
+            </div>
 
-            <h3>We never had much.</h3>
+            <h3>
+                We never had much.
+            </h3>
 
             <p>
                 My mother used to clean at a local church and earned
@@ -1042,9 +1383,13 @@ footer {
 
         <div class="card reveal">
 
-            <div class="card-number">03 — CHURCH</div>
+            <div class="card-number">
+                03 — CHURCH
+            </div>
 
-            <h3>Part of my childhood.</h3>
+            <h3>
+                Part of my childhood.
+            </h3>
 
             <p>
                 My family loved church. We used to go almost every
@@ -1057,9 +1402,13 @@ footer {
 
         <div class="card full reveal">
 
-            <div class="card-number">04 — LESSONS</div>
+            <div class="card-number">
+                04 — LESSONS
+            </div>
 
-            <h3>Mistakes taught me.</h3>
+            <h3>
+                Mistakes taught me.
+            </h3>
 
             <p>
                 I've made many mistakes, but I believe the most
@@ -1078,15 +1427,17 @@ footer {
 
 </section>
 
-<!-- =====================================================
+<!-- =========================
      MY JOURNEY
-===================================================== -->
+========================= -->
 
 <section class="section chapter">
 
 <div class="section-inner">
 
-    <div class="section-label">CHAPTER 03 / MY JOURNEY</div>
+    <div class="section-label">
+        CHAPTER 03 / MY JOURNEY
+    </div>
 
     <h2 class="section-title reveal">
         my<br>
@@ -1097,9 +1448,13 @@ footer {
 
         <div class="timeline-item reveal">
 
-            <div class="timeline-year">2022</div>
+            <div class="timeline-year">
+                2022
+            </div>
 
-            <h3>The year I failed Grade 10.</h3>
+            <h3>
+                The year I failed Grade 10.
+            </h3>
 
             <p>
                 Failing Grade 10 made me realise that I needed
@@ -1112,9 +1467,13 @@ footer {
 
         <div class="timeline-item reveal">
 
-            <div class="timeline-year">2022 — 2025</div>
+            <div class="timeline-year">
+                2022 — 2025
+            </div>
 
-            <h3>Learning to learn.</h3>
+            <h3>
+                Learning to learn.
+            </h3>
 
             <p>
                 Over the following years, I became increasingly
@@ -1127,9 +1486,13 @@ footer {
 
         <div class="timeline-item reveal">
 
-            <div class="timeline-year">2026</div>
+            <div class="timeline-year">
+                2026
+            </div>
 
-            <h3>University.</h3>
+            <h3>
+                University.
+            </h3>
 
             <p>
                 I applied to university late and chose B.Com
@@ -1142,9 +1505,13 @@ footer {
 
         <div class="timeline-item reveal">
 
-            <div class="timeline-year">JUNE 2026</div>
+            <div class="timeline-year">
+                JUNE 2026
+            </div>
 
-            <h3>Discovering technology.</h3>
+            <h3>
+                Discovering technology.
+            </h3>
 
             <p>
                 Around June 2026, I discovered how much I enjoy
@@ -1157,9 +1524,13 @@ footer {
 
         <div class="timeline-item reveal">
 
-            <div class="timeline-year">NOW</div>
+            <div class="timeline-year">
+                NOW
+            </div>
 
-            <h3>Still moving.</h3>
+            <h3>
+                Still moving.
+            </h3>
 
             <p>
                 I'm proud that I made it this far. I'm learning,
@@ -1175,15 +1546,17 @@ footer {
 
 </section>
 
-<!-- =====================================================
+<!-- =========================
      THINGS I'VE BUILT
-===================================================== -->
+========================= -->
 
 <section class="section chapter">
 
 <div class="section-inner">
 
-    <div class="section-label">CHAPTER 04 / THINGS I'VE BUILT</div>
+    <div class="section-label">
+        CHAPTER 04 / THINGS I'VE BUILT
+    </div>
 
     <h2 class="section-title reveal">
         things<br>
@@ -1192,39 +1565,77 @@ footer {
 
     <div class="projects">
 
+        <!-- SUMS -->
+
         <div class="project reveal">
 
-            <div class="project-visual">
-                <span>SUMS</span>
-            </div>
+            <a
+                class="project-link"
+                href="https://sums-streetwear.github.io/sums-streetwear/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
 
-            <div class="project-info">
+                <div class="project-visual">
+                    <span>SUMS</span>
+                </div>
 
-                <h3>SUMS</h3>
+                <div class="project-info">
 
-                <p>
-                    A website I worked on for my friend Unathi's
-                    clothing brand. Unathi is the founder of SUMS.
-                </p>
+                    <div class="project-number">
+                        PROJECT / 001
+                    </div>
 
-            </div>
+                    <h3>
+                        SUMS
+                    </h3>
+
+                    <p>
+                        A website I worked on for my friend
+                        Unathi's clothing brand. Unathi is
+                        the founder of SUMS.
+                    </p>
+
+                    <div class="project-open">
+                        OPEN PROJECT →
+                    </div>
+
+                </div>
+
+            </a>
 
         </div>
 
+        <!-- UNI CIRCLE -->
+
         <div class="project reveal">
 
-            <div class="project-visual">
-                <span>UNI CIRCLE</span>
-            </div>
+            <div class="project-link">
 
-            <div class="project-info">
+                <div class="project-visual">
+                    <span>UNI CIRCLE</span>
+                </div>
 
-                <h3>Uni Circle</h3>
+                <div class="project-info">
 
-                <p>
-                    A university-focused application I am currently
-                    building and developing.
-                </p>
+                    <div class="project-number">
+                        PROJECT / 002
+                    </div>
+
+                    <h3>
+                        Uni Circle
+                    </h3>
+
+                    <p>
+                        A university-focused application I am
+                        currently building and developing.
+                    </p>
+
+                    <div class="project-open">
+                        CURRENTLY BUILDING
+                    </div>
+
+                </div>
 
             </div>
 
@@ -1236,15 +1647,17 @@ footer {
 
 </section>
 
-<!-- =====================================================
+<!-- =========================
      THINGS I'M BUILDING
-===================================================== -->
+========================= -->
 
 <section class="section chapter">
 
 <div class="section-inner">
 
-    <div class="section-label">CHAPTER 05 / THINGS I'M BUILDING</div>
+    <div class="section-label">
+        CHAPTER 05 / THINGS I'M BUILDING
+    </div>
 
     <h2 class="section-title reveal">
         things<br>
@@ -1255,9 +1668,13 @@ footer {
 
         <div class="card full reveal">
 
-            <div class="card-number">01 — RIGHT NOW</div>
+            <div class="card-number">
+                01 — RIGHT NOW
+            </div>
 
-            <h3>Learning by building.</h3>
+            <h3>
+                Learning by building.
+            </h3>
 
             <p>
                 Right now, I am becoming more interested in creating
@@ -1272,9 +1689,13 @@ footer {
 
         <div class="card reveal">
 
-            <div class="card-number">02 — WEBSITES</div>
+            <div class="card-number">
+                02 — WEBSITES
+            </div>
 
-            <h3>Building for people.</h3>
+            <h3>
+                Building for people.
+            </h3>
 
             <p>
                 I want to create websites for people and learn how
@@ -1285,9 +1706,13 @@ footer {
 
         <div class="card reveal">
 
-            <div class="card-number">03 — APPS</div>
+            <div class="card-number">
+                03 — APPS
+            </div>
 
-            <h3>Building my own ideas.</h3>
+            <h3>
+                Building my own ideas.
+            </h3>
 
             <p>
                 I want to create applications from my own ideas
@@ -1298,9 +1723,13 @@ footer {
 
         <div class="card full reveal">
 
-            <div class="card-number">04 — THE DIRECTION</div>
+            <div class="card-number">
+                04 — THE DIRECTION
+            </div>
 
-            <h3>I want to build.</h3>
+            <h3>
+                I want to build.
+            </h3>
 
             <p>
                 I don't want coding to remain something I only learn
@@ -1317,29 +1746,35 @@ footer {
 
 </section>
 
-<!-- =====================================================
+<!-- =========================
      STATEMENT
-===================================================== -->
+========================= -->
 
 <section class="statement chapter">
 
     <div class="statement-text reveal">
+
         I don't want to only<br>
+
         <span>learn.</span><br>
+
         I want to build.
+
     </div>
 
 </section>
 
-<!-- =====================================================
+<!-- =========================
      THINGS I WANT TO CREATE
-===================================================== -->
+========================= -->
 
 <section class="section chapter">
 
 <div class="section-inner">
 
-    <div class="section-label">CHAPTER 06 / THINGS I WANT TO CREATE</div>
+    <div class="section-label">
+        CHAPTER 06 / THINGS I WANT TO CREATE
+    </div>
 
     <h2 class="section-title reveal">
         things i<br>
@@ -1349,18 +1784,39 @@ footer {
     <div class="idea-grid">
 
         <div class="idea reveal">
-            <small>IDEA / 01</small>
-            <h3>Websites</h3>
+
+            <small>
+                IDEA / 01
+            </small>
+
+            <h3>
+                Websites
+            </h3>
+
         </div>
 
         <div class="idea reveal">
-            <small>IDEA / 02</small>
-            <h3>Applications</h3>
+
+            <small>
+                IDEA / 02
+            </small>
+
+            <h3>
+                Applications
+            </h3>
+
         </div>
 
         <div class="idea reveal">
-            <small>IDEA / 03</small>
-            <h3>Businesses</h3>
+
+            <small>
+                IDEA / 03
+            </small>
+
+            <h3>
+                Businesses
+            </h3>
+
         </div>
 
     </div>
@@ -1369,15 +1825,17 @@ footer {
 
 </section>
 
-<!-- =====================================================
+<!-- =========================
      MY MIND
-===================================================== -->
+========================= -->
 
 <section class="section chapter">
 
 <div class="section-inner">
 
-    <div class="section-label">CHAPTER 07 / MY MIND</div>
+    <div class="section-label">
+        CHAPTER 07 / MY MIND
+    </div>
 
     <h2 class="section-title reveal">
         my<br>
@@ -1388,9 +1846,13 @@ footer {
 
         <div class="card full reveal">
 
-            <div class="card-number">01 — CURRENTLY</div>
+            <div class="card-number">
+                01 — CURRENTLY
+            </div>
 
-            <h3>Always learning.</h3>
+            <h3>
+                Always learning.
+            </h3>
 
             <p>
                 I am still learning how to understand myself,
@@ -1404,9 +1866,13 @@ footer {
 
         <div class="card reveal">
 
-            <div class="card-number">02 — CURIOSITY</div>
+            <div class="card-number">
+                02 — CURIOSITY
+            </div>
 
-            <h3>I want to know more.</h3>
+            <h3>
+                I want to know more.
+            </h3>
 
             <p>
                 The more I learn, the more curious I become.
@@ -1418,9 +1884,13 @@ footer {
 
         <div class="card reveal">
 
-            <div class="card-number">03 — DIFFERENT</div>
+            <div class="card-number">
+                03 — DIFFERENT
+            </div>
 
-            <h3>I want to move differently.</h3>
+            <h3>
+                I want to move differently.
+            </h3>
 
             <p>
                 I don't want to simply follow the same path as
@@ -1436,15 +1906,17 @@ footer {
 
 </section>
 
-<!-- =====================================================
+<!-- =========================
      MY DREAMS
-===================================================== -->
+========================= -->
 
 <section class="section chapter">
 
 <div class="section-inner">
 
-    <div class="section-label">CHAPTER 08 / MY DREAMS</div>
+    <div class="section-label">
+        CHAPTER 08 / MY DREAMS
+    </div>
 
     <h2 class="section-title reveal">
         my<br>
@@ -1455,9 +1927,13 @@ footer {
 
         <div class="card reveal">
 
-            <div class="card-number">01 — BUSINESS</div>
+            <div class="card-number">
+                01 — BUSINESS
+            </div>
 
-            <h3>Own businesses.</h3>
+            <h3>
+                Own businesses.
+            </h3>
 
             <p>
                 I want to build and own businesses and create
@@ -1468,9 +1944,13 @@ footer {
 
         <div class="card reveal">
 
-            <div class="card-number">02 — TECHNOLOGY</div>
+            <div class="card-number">
+                02 — TECHNOLOGY
+            </div>
 
-            <h3>Become a developer.</h3>
+            <h3>
+                Become a developer.
+            </h3>
 
             <p>
                 I want to become a developer and build useful
@@ -1481,9 +1961,13 @@ footer {
 
         <div class="card full reveal">
 
-            <div class="card-number">03 — FAMILY</div>
+            <div class="card-number">
+                03 — FAMILY
+            </div>
 
-            <h3>Change where I come from.</h3>
+            <h3>
+                Change where I come from.
+            </h3>
 
             <p>
                 I come from a family that has never had much
@@ -1500,9 +1984,9 @@ footer {
 
 </section>
 
-<!-- =====================================================
+<!-- =========================
      FUTURE
-===================================================== -->
+========================= -->
 
 <section class="future chapter">
 
@@ -1526,15 +2010,21 @@ footer {
 
 </section>
 
-<!-- =====================================================
+<!-- =========================
      FOOTER
-===================================================== -->
+========================= -->
 
 <footer>
 
     <div class="footer-logo">
-        <img src="logo.png" alt="Before The Name">
+
+        <img
+            src="logo.png"
+            alt="Before The Name"
+        >
+
         BEFORE THE NAME
+
     </div>
 
     <div>
@@ -1545,123 +2035,189 @@ footer {
 
 <script>
 
-/* =========================================================
-   CUSTOM CURSOR
-========================================================= */
+/* =========================
+   CURSOR
+========================= */
 
-const cursor = document.querySelector(".cursor");
+const cursor =
+    document.querySelector(".cursor");
 
-document.addEventListener("mousemove", e => {
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
-});
+document.addEventListener(
+    "mousemove",
+    event => {
 
-document.querySelectorAll(
-    "a, .card, .project, .idea"
-).forEach(element => {
+        cursor.style.left =
+            event.clientX + "px";
 
-    element.addEventListener("mouseenter", () => {
-        cursor.classList.add("big");
-    });
+        cursor.style.top =
+            event.clientY + "px";
 
-    element.addEventListener("mouseleave", () => {
-        cursor.classList.remove("big");
-    });
-
-});
-
-
-/* =========================================================
-   SCROLL REVEALS
-========================================================= */
-
-const revealObserver = new IntersectionObserver(
-    entries => {
-
-        entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-
-                entry.target.classList.add("visible");
-
-                revealObserver.unobserve(entry.target);
-
-            }
-
-        });
-
-    },
-    {
-        threshold: .12
     }
 );
 
-document.querySelectorAll(".reveal").forEach(element => {
-    revealObserver.observe(element);
-});
+document
+    .querySelectorAll(
+        "a, .card, .project, .idea"
+    )
+    .forEach(element => {
+
+        element.addEventListener(
+            "mouseenter",
+            () => {
+                cursor.classList.add("big");
+            }
+        );
+
+        element.addEventListener(
+            "mouseleave",
+            () => {
+                cursor.classList.remove("big");
+            }
+        );
+
+    });
 
 
-/* =========================================================
-   CHAPTER DOTS
-========================================================= */
+/* =========================
+   SCROLL REVEALS
+========================= */
 
-const chapters = document.querySelectorAll(".chapter");
-const dots = document.querySelectorAll(".chapter-nav span");
+const revealObserver =
+    new IntersectionObserver(
+        entries => {
 
-const chapterObserver = new IntersectionObserver(
-    entries => {
+            entries.forEach(entry => {
 
-        entries.forEach(entry => {
+                if (
+                    entry.isIntersecting
+                ) {
 
-            if (entry.isIntersecting) {
+                    entry.target
+                        .classList
+                        .add("visible");
 
-                const index =
-                    Array.from(chapters).indexOf(entry.target);
+                    revealObserver
+                        .unobserve(
+                            entry.target
+                        );
 
-                dots.forEach(dot => {
-                    dot.classList.remove("active");
-                });
-
-                if (dots[index]) {
-                    dots[index].classList.add("active");
                 }
 
-            }
+            });
 
-        });
+        },
+        {
+            threshold: .12
+        }
+    );
 
-    },
-    {
-        threshold: .45
+document
+    .querySelectorAll(".reveal")
+    .forEach(element => {
+
+        revealObserver.observe(element);
+
+    });
+
+
+/* =========================
+   CHAPTER DOTS
+========================= */
+
+const chapters =
+    document.querySelectorAll(".chapter");
+
+const dots =
+    document.querySelectorAll(
+        ".chapter-nav span"
+    );
+
+const chapterObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (
+                    entry.isIntersecting
+                ) {
+
+                    const index =
+                        Array.from(
+                            chapters
+                        ).indexOf(
+                            entry.target
+                        );
+
+                    dots.forEach(dot => {
+                        dot.classList
+                            .remove("active");
+                    });
+
+                    if (dots[index]) {
+
+                        dots[index]
+                            .classList
+                            .add("active");
+
+                    }
+
+                }
+
+            });
+
+        },
+        {
+            threshold: .45
+        }
+    );
+
+chapters.forEach(chapter => {
+
+    chapterObserver.observe(
+        chapter
+    );
+
+});
+
+
+/* =========================
+   MOVING GLOW
+========================= */
+
+window.addEventListener(
+    "mousemove",
+    event => {
+
+        const x =
+            (
+                event.clientX /
+                window.innerWidth -
+                .5
+            ) * 40;
+
+        const y =
+            (
+                event.clientY /
+                window.innerHeight -
+                .5
+            ) * 40;
+
+        document.querySelector(
+            ".glow"
+        ).style.transform =
+            `translate(calc(-50% + ${x}px), ${y}px)`;
+
     }
 );
 
-chapters.forEach(chapter => {
-    chapterObserver.observe(chapter);
-});
 
-
-/* =========================================================
-   PARALLAX GLOW
-========================================================= */
-
-window.addEventListener("mousemove", e => {
-
-    const x = (e.clientX / window.innerWidth - .5) * 40;
-    const y = (e.clientY / window.innerHeight - .5) * 40;
-
-    document.querySelector(".glow").style.transform =
-        `translate(calc(-50% + ${x}px), ${y}px)`;
-
-});
-
-
-/* =========================================================
-   CURRENT YEAR
-========================================================= */
+/* =========================
+   CONSOLE
+========================= */
 
 console.log(
-    "BEFORE THE NAME — Archive 001"
+    "BEFORE THE NAME — ARCHIVE 001"
 );
 
 </script>
