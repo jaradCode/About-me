@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Things I've Built</title>
+<title>My Story</title>
 
 <style>
 
 /* =========================================================
-   BASE
+   RESET
 ========================================================= */
 
 * {
@@ -23,10 +23,89 @@ html {
 }
 
 body {
-    background: #f5f3ef;
-    color: #171717;
+    background: #11100f;
+    color: #eeeae4;
     font-family: Georgia, "Times New Roman", serif;
     overflow-x: hidden;
+}
+
+
+/* =========================================================
+   CUSTOM SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #11100f;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4c4945;
+}
+
+
+/* =========================================================
+   FILM GRAIN
+========================================================= */
+
+.grain {
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: .055;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+
+    animation: grainMove .25s steps(2) infinite;
+}
+
+@keyframes grainMove {
+
+    0% {
+        transform: translate(0,0);
+    }
+
+    25% {
+        transform: translate(2%,-2%);
+    }
+
+    50% {
+        transform: translate(-2%,2%);
+    }
+
+    75% {
+        transform: translate(2%,2%);
+    }
+
+    100% {
+        transform: translate(-2%,-2%);
+    }
+}
+
+
+/* =========================================================
+   VIGNETTE
+========================================================= */
+
+.vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 45%,
+            rgba(0,0,0,.5) 100%
+        );
 }
 
 
@@ -34,305 +113,438 @@ body {
    NAVIGATION
 ========================================================= */
 
-.navbar {
+.nav {
+
     position: fixed;
+
     top: 0;
     left: 0;
+
     width: 100%;
-    padding: 25px 6%;
+
+    padding: 28px 45px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 1000;
 
-    background: rgba(245,243,239,0.88);
-    backdrop-filter: blur(15px);
+    z-index: 500;
+
+    mix-blend-mode: difference;
+
 }
 
-.logo {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 22px;
+.nav-name {
+
+    color: white;
+
+    font-size: 15px;
+
     font-style: italic;
-    letter-spacing: -1px;
+
+    letter-spacing: .5px;
+
 }
 
-.nav-links {
-    display: flex;
-    gap: 35px;
-    list-style: none;
-}
+.nav-right {
 
-.nav-links a {
-    text-decoration: none;
-    color: #171717;
+    color: white;
+
     font-family: Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 2px;
-    transition: opacity .3s ease;
-}
 
-.nav-links a:hover {
-    opacity: .5;
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    opacity: .7;
+
 }
 
 
 /* =========================================================
-   GENERAL
+   SIDE CHAPTER INDICATOR
 ========================================================= */
 
-section {
+.chapter-indicator {
+
+    position: fixed;
+
+    left: 35px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 400;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+.chapter-dot {
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.25);
+
+    transition: .5s;
+
+}
+
+.chapter-dot.active {
+
+    background: white;
+
+    transform: scale(1.8);
+
+}
+
+
+/* =========================================================
+   GENERAL CHAPTER
+========================================================= */
+
+.chapter {
+
+    min-height: 100vh;
+
     width: 100%;
+
     position: relative;
-}
-
-.section-label {
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    opacity: .55;
-}
-
-.section-title {
-    font-family: Georgia, "Times New Roman", serif;
-    font-weight: normal;
-    font-style: italic;
-    font-size: clamp(45px, 8vw, 100px);
-    line-height: .95;
-    letter-spacing: -4px;
-}
-
-
-/* =========================================================
-   HOME
-========================================================= */
-
-#home {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 120px 7%;
-}
-
-.home-content {
-    max-width: 1100px;
-}
-
-.home-small {
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    letter-spacing: 5px;
-    margin-bottom: 35px;
-    opacity: .5;
-}
-
-.home-title {
-    font-family: Georgia, "Times New Roman", serif;
-    font-weight: normal;
-    font-style: italic;
-    font-size: clamp(60px, 12vw, 170px);
-    line-height: .82;
-    letter-spacing: -8px;
-}
-
-.home-title span {
-    display: block;
-}
-
-.home-subtitle {
-    margin-top: 45px;
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    opacity: .55;
-}
-
-.home-button {
-    display: inline-block;
-    margin-top: 45px;
-    padding: 14px 30px;
-    border: 1px solid #171717;
-    color: #171717;
-    text-decoration: none;
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    transition: .3s ease;
-}
-
-.home-button:hover {
-    background: #171717;
-    color: #f5f3ef;
-}
-
-
-/* =========================================================
-   PROJECTS
-========================================================= */
-
-#projects {
-    min-height: 100vh;
-    padding: 140px 7%;
-}
-
-.projects-heading {
-    margin-bottom: 80px;
-}
-
-.projects-heading .section-title {
-    max-width: 800px;
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 70px 35px;
-}
-
-
-/* =========================================================
-   PROJECT CARD
-========================================================= */
-
-.project-card {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
-.project-image {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-
-    background: #e8e5df;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     overflow: hidden;
 
-    transition: transform .6s cubic-bezier(.2,.8,.2,1);
-}
-
-.project-card:hover .project-image {
-    transform: scale(.98);
-}
-
-.project-image span {
-    font-family: Arial, sans-serif;
-    font-size: 9px;
-    letter-spacing: 4px;
-    opacity: .3;
-}
-
-.project-details {
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.project-name {
-    font-family: Georgia, "Times New Roman", serif;
-    font-style: italic;
-    font-weight: normal;
-    font-size: 28px;
-    letter-spacing: -1px;
-}
-
-.project-category {
-    font-family: Arial, sans-serif;
-    font-size: 9px;
-    letter-spacing: 2px;
-    opacity: .5;
-    padding-top: 8px;
 }
 
 
 /* =========================================================
-   FEATURED PROJECT
+   HERO
 ========================================================= */
 
-.featured {
-    grid-column: 1 / -1;
-}
+.hero {
 
-.featured .project-image {
-    aspect-ratio: 21 / 9;
-}
-
-.featured .project-name {
-    font-size: clamp(35px, 5vw, 60px);
-}
-
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-#about {
     min-height: 100vh;
-    padding: 150px 7%;
-    display: flex;
-    align-items: center;
+
+    text-align: center;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            #302d29 0%,
+            #171614 35%,
+            #11100f 75%
+        );
+
 }
 
-.about-content {
-    width: 100%;
+.hero-content {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 90%;
+
 }
 
-.about-text {
-    max-width: 900px;
-    margin-top: 60px;
+.hero-eyebrow {
 
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(30px, 5vw, 65px);
-    line-height: 1.08;
-    font-style: italic;
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 6px;
+
+    text-transform: uppercase;
+
+    color: #aaa49c;
+
+    margin-bottom: 40px;
+
+    opacity: 0;
+
+    animation: fadeUp 1.5s .4s forwards;
+
+}
+
+.hero-title {
+
+    font-size: clamp(75px, 15vw, 210px);
+
     font-weight: normal;
-    letter-spacing: -2px;
+
+    font-style: italic;
+
+    line-height: .78;
+
+    letter-spacing: -9px;
+
+    color: #eeeae4;
+
+    opacity: 0;
+
+    animation: heroTitle 2s .7s cubic-bezier(.2,.8,.2,1) forwards;
+
+}
+
+.hero-title span {
+
+    display: block;
+
+}
+
+.hero-title span:last-child {
+
+    margin-left: 10vw;
+
+}
+
+.hero-bottom {
+
+    position: absolute;
+
+    bottom: 40px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 7px;
+
+    letter-spacing: 4px;
+
+    opacity: 0;
+
+    animation: fadeUp 1.5s 1.4s forwards;
+
+}
+
+.scroll-line {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 50%;
+
+    width: 1px;
+
+    height: 30px;
+
+    background: rgba(255,255,255,.4);
+
 }
 
 
 /* =========================================================
-   CONTACT
+   EMPTY CHAPTERS
 ========================================================= */
 
-#contact {
-    min-height: 90vh;
-    padding: 150px 7%;
-    display: flex;
-    align-items: center;
+.empty-chapter {
+
+    background: #11100f;
+
+    padding: 100px 9%;
+
 }
 
-.contact-content {
-    width: 100%;
+.empty-chapter:nth-child(even) {
+
+    background: #151412;
+
 }
 
-.contact-title {
+
+/* giant background chapter number */
+
+.chapter-number {
+
+    position: absolute;
+
+    left: -30px;
+
+    bottom: -80px;
+
     font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(55px, 11vw, 150px);
-    line-height: .85;
+
+    font-size: min(45vw, 600px);
+
+    line-height: .7;
+
     font-style: italic;
-    font-weight: normal;
-    letter-spacing: -7px;
+
+    color: rgba(255,255,255,.025);
+
+    user-select: none;
+
 }
 
-.contact-link {
-    display: inline-block;
-    margin-top: 50px;
-    color: #171717;
-    text-decoration: none;
-    border-bottom: 1px solid #171717;
-    padding-bottom: 8px;
+
+/* title */
+
+.chapter-content {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 100%;
+
+}
+
+.chapter-top {
 
     font-family: Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
+
+    font-size: 8px;
+
+    letter-spacing: 5px;
+
+    color: #77736d;
+
+    margin-bottom: 35px;
+
+}
+
+.chapter-title {
+
+    font-size: clamp(60px, 11vw, 150px);
+
+    font-weight: normal;
+
+    font-style: italic;
+
+    letter-spacing: -7px;
+
+    line-height: .8;
+
+    color: #eeeae4;
+
+}
+
+
+/* =========================================================
+   SPECIAL CHAPTER TRANSITIONS
+========================================================= */
+
+.chapter::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 70vw;
+
+    height: 70vw;
+
+    max-width: 800px;
+    max-height: 800px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.025);
+
+    pointer-events: none;
+
+}
+
+.chapter:nth-child(3)::before {
+
+    transform: translate(30%, 20%);
+
+}
+
+.chapter:nth-child(4)::before {
+
+    transform: translate(-30%, -20%);
+
+}
+
+.chapter:nth-child(5)::before {
+
+    transform: translate(25%, -25%);
+
+}
+
+.chapter:nth-child(6)::before {
+
+    transform: translate(-25%, 25%);
+
+}
+
+
+/* =========================================================
+   FINAL CHAPTER
+========================================================= */
+
+.future {
+
+    min-height: 120vh;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 45%,
+            #36312c,
+            #171614 35%,
+            #11100f 75%
+        );
+
+    text-align: center;
+
+}
+
+.future .chapter-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
+
+.future-title {
+
+    font-size: clamp(75px, 15vw, 200px);
+
+    font-weight: normal;
+
+    font-style: italic;
+
+    line-height: .75;
+
+    letter-spacing: -10px;
+
+}
+
+.future-small {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 7px;
+
+    letter-spacing: 5px;
+
+    color: #88827b;
+
+    margin-bottom: 40px;
+
 }
 
 
@@ -341,46 +553,72 @@ section {
 ========================================================= */
 
 footer {
-    padding: 30px 7%;
-    border-top: 1px solid rgba(0,0,0,.12);
+
+    height: 80px;
 
     display: flex;
-    justify-content: space-between;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #11100f;
+
+    color: #625e59;
 
     font-family: Arial, sans-serif;
-    font-size: 9px;
-    letter-spacing: 2px;
-    opacity: .45;
+
+    font-size: 7px;
+
+    letter-spacing: 4px;
+
 }
 
 
 /* =========================================================
-   TEXT REVEAL ANIMATION
+   ANIMATIONS
 ========================================================= */
 
-.reveal {
-    opacity: 0;
-    transform: translateY(35px);
-    animation: revealText 1.2s cubic-bezier(.2,.8,.2,1) forwards;
-}
+@keyframes fadeUp {
 
-.delay-1 {
-    animation-delay: .2s;
-}
+    from {
 
-.delay-2 {
-    animation-delay: .4s;
-}
+        opacity: 0;
 
-.delay-3 {
-    animation-delay: .6s;
-}
+        transform: translateY(20px);
 
-@keyframes revealText {
+    }
 
     to {
+
         opacity: 1;
+
         transform: translateY(0);
+
+    }
+
+}
+
+@keyframes heroTitle {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(50px) scale(.97);
+
+        filter: blur(10px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+
+        filter: blur(0);
+
     }
 
 }
@@ -390,348 +628,262 @@ footer {
    MOBILE
 ========================================================= */
 
-@media (max-width: 700px) {
+@media(max-width: 700px) {
 
-    .navbar {
-        padding: 20px 5%;
+    .nav {
+
+        padding: 22px 22px;
+
     }
 
-    .logo {
-        font-size: 18px;
+    .nav-right {
+
+        display: none;
+
     }
 
-    .nav-links {
-        gap: 14px;
+    .chapter-indicator {
+
+        display: none;
+
     }
 
-    .nav-links a {
-        font-size: 8px;
-        letter-spacing: 1px;
+    .hero-title {
+
+        font-size: 70px;
+
+        letter-spacing: -5px;
+
     }
 
-    #home {
-        padding: 100px 6%;
+    .hero-title span:last-child {
+
+        margin-left: 15vw;
+
     }
 
-    .home-title {
-        font-size: 62px;
-        letter-spacing: -4px;
+    .chapter {
+
+        min-height: 90vh;
+
     }
 
-    .home-subtitle {
-        line-height: 1.8;
+    .empty-chapter {
+
+        padding: 80px 7%;
+
     }
 
-    #projects {
-        padding: 110px 6%;
-    }
+    .chapter-title {
 
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 50px;
-    }
-
-    .featured {
-        grid-column: auto;
-    }
-
-    .featured .project-image {
-        aspect-ratio: 16 / 10;
-    }
-
-    .project-name {
-        font-size: 24px;
-    }
-
-    #about,
-    #contact {
-        padding: 110px 6%;
-    }
-
-    .about-text {
-        font-size: 34px;
-    }
-
-    .contact-title {
         font-size: 65px;
-        letter-spacing: -4px;
+
+        letter-spacing: -5px;
+
     }
 
-    footer {
-        padding: 25px 6%;
-        flex-direction: column;
-        gap: 10px;
+    .chapter-number {
+
+        font-size: 100vw;
+
+    }
+
+    .future-title {
+
+        font-size: 75px;
+
+        letter-spacing: -5px;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion: reduce) {
+
+    * {
+
+        animation-duration: .01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
     }
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
+<!-- FILM EFFECTS -->
+
+<div class="grain"></div>
+
+<div class="vignette"></div>
+
+
+
 <!-- =====================================================
      NAVIGATION
 ===================================================== -->
 
-<nav class="navbar">
+<nav class="nav">
 
-    <div class="logo">
-        things i've built
+    <div class="nav-name">
+        my story
     </div>
 
-    <ul class="nav-links">
-
-        <li>
-            <a href="#home">HOME</a>
-        </li>
-
-        <li>
-            <a href="#projects">PROJECTS</a>
-        </li>
-
-        <li>
-            <a href="#about">ABOUT</a>
-        </li>
-
-        <li>
-            <a href="#contact">CONTACT</a>
-        </li>
-
-    </ul>
+    <div class="nav-right">
+        A DOCUMENTARY
+    </div>
 
 </nav>
 
 
 
 <!-- =====================================================
-     HOME
+     CHAPTER INDICATOR
 ===================================================== -->
 
-<section id="home">
+<div class="chapter-indicator">
 
-    <div class="home-content">
+    <div class="chapter-dot active"></div>
 
-        <div class="home-small reveal">
-            A COLLECTION OF MY WORK
+    <div class="chapter-dot"></div>
+
+    <div class="chapter-dot"></div>
+
+    <div class="chapter-dot"></div>
+
+    <div class="chapter-dot"></div>
+
+    <div class="chapter-dot"></div>
+
+    <div class="chapter-dot"></div>
+
+    <div class="chapter-dot"></div>
+
+    <div class="chapter-dot"></div>
+
+</div>
+
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<section class="chapter hero" id="me">
+
+    <div class="hero-content">
+
+        <div class="hero-eyebrow">
+            MY STORY
         </div>
 
-        <h1 class="home-title reveal delay-1">
+        <h1 class="hero-title">
 
-            <span>Things</span>
-            <span>I've Built.</span>
+            <span>this</span>
+
+            <span>is me.</span>
 
         </h1>
 
-        <div class="home-subtitle reveal delay-2">
-            websites · apps · ideas · experiments
-        </div>
-
-        <a
-            href="#projects"
-            class="home-button reveal delay-3"
-        >
-            EXPLORE
-        </a>
-
     </div>
+
+
+    <div class="hero-bottom">
+        SCROLL TO BEGIN
+    </div>
+
+    <div class="scroll-line"></div>
 
 </section>
 
 
 
 <!-- =====================================================
-     PROJECTS
+     MY STORY
 ===================================================== -->
 
-<section id="projects">
+<section class="chapter empty-chapter" id="story">
 
-    <div class="projects-heading">
+    <div class="chapter-number">
+        01
+    </div>
 
-        <div class="section-label">
-            01 — PROJECTS
+    <div class="chapter-content">
+
+        <div class="chapter-top">
+            CHAPTER 01
         </div>
 
-        <h2 class="section-title">
-            Things I've<br>
-            made along<br>
-            the way.
+        <h2 class="chapter-title">
+            my story
         </h2>
 
     </div>
 
-
-    <div class="projects-grid">
-
-
-        <!-- FEATURED PROJECT -->
-
-        <div class="project-card featured">
-
-            <div class="project-image">
-
-                <span>
-                    PROJECT IMAGE
-                </span>
-
-            </div>
-
-            <div class="project-details">
-
-                <div class="project-name">
-                    Project Name
-                </div>
-
-                <div class="project-category">
-                    FEATURED
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- PROJECT -->
-
-        <div class="project-card">
-
-            <div class="project-image">
-
-                <span>
-                    PROJECT IMAGE
-                </span>
-
-            </div>
-
-            <div class="project-details">
-
-                <div class="project-name">
-                    Project Name
-                </div>
-
-                <div class="project-category">
-                    WEBSITE
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- PROJECT -->
-
-        <div class="project-card">
-
-            <div class="project-image">
-
-                <span>
-                    PROJECT IMAGE
-                </span>
-
-            </div>
-
-            <div class="project-details">
-
-                <div class="project-name">
-                    Project Name
-                </div>
-
-                <div class="project-category">
-                    APP
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- PROJECT -->
-
-        <div class="project-card">
-
-            <div class="project-image">
-
-                <span>
-                    PROJECT IMAGE
-                </span>
-
-            </div>
-
-            <div class="project-details">
-
-                <div class="project-name">
-                    Project Name
-                </div>
-
-                <div class="project-category">
-                    AI
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- PROJECT -->
-
-        <div class="project-card">
-
-            <div class="project-image">
-
-                <span>
-                    PROJECT IMAGE
-                </span>
-
-            </div>
-
-            <div class="project-details">
-
-                <div class="project-name">
-                    Project Name
-                </div>
-
-                <div class="project-category">
-                    EXPERIMENT
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
 </section>
 
 
 
 <!-- =====================================================
-     ABOUT
+     MY JOURNEY
 ===================================================== -->
 
-<section id="about">
+<section class="chapter empty-chapter" id="journey">
 
-    <div class="about-content">
+    <div class="chapter-number">
+        02
+    </div>
 
-        <div class="section-label">
-            02 — ABOUT
+    <div class="chapter-content">
+
+        <div class="chapter-top">
+            CHAPTER 02
         </div>
 
-        <h2 class="section-title">
-            About
+        <h2 class="chapter-title">
+            my journey
         </h2>
 
-        <div class="about-text">
+    </div>
 
-            This space will tell the story behind
-            the things I create.
+</section>
 
+
+
+<!-- =====================================================
+     THINGS I'VE BUILT
+===================================================== -->
+
+<section class="chapter empty-chapter" id="built">
+
+    <div class="chapter-number">
+        03
+    </div>
+
+    <div class="chapter-content">
+
+        <div class="chapter-top">
+            CHAPTER 03
         </div>
+
+        <h2 class="chapter-title">
+            things<br>
+            i've built
+        </h2>
 
     </div>
 
@@ -740,28 +892,127 @@ footer {
 
 
 <!-- =====================================================
-     CONTACT
+     THINGS I'M BUILDING
 ===================================================== -->
 
-<section id="contact">
+<section class="chapter empty-chapter" id="building">
 
-    <div class="contact-content">
+    <div class="chapter-number">
+        04
+    </div>
 
-        <div class="section-label">
-            03 — CONTACT
+    <div class="chapter-content">
+
+        <div class="chapter-top">
+            CHAPTER 04
         </div>
 
-        <div class="contact-title">
-            Let's<br>
-            talk.
+        <h2 class="chapter-title">
+            things<br>
+            i'm building
+        </h2>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     THINGS I WANT TO CREATE
+===================================================== -->
+
+<section class="chapter empty-chapter" id="create">
+
+    <div class="chapter-number">
+        05
+    </div>
+
+    <div class="chapter-content">
+
+        <div class="chapter-top">
+            CHAPTER 05
         </div>
 
-        <a
-            href="#"
-            class="contact-link"
-        >
-            CONTACT ME
-        </a>
+        <h2 class="chapter-title">
+            things i<br>
+            want to create
+        </h2>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MY MIND
+===================================================== -->
+
+<section class="chapter empty-chapter" id="mind">
+
+    <div class="chapter-number">
+        06
+    </div>
+
+    <div class="chapter-content">
+
+        <div class="chapter-top">
+            CHAPTER 06
+        </div>
+
+        <h2 class="chapter-title">
+            my mind
+        </h2>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MY DREAMS
+===================================================== -->
+
+<section class="chapter empty-chapter" id="dreams">
+
+    <div class="chapter-number">
+        07
+    </div>
+
+    <div class="chapter-content">
+
+        <div class="chapter-top">
+            CHAPTER 07
+        </div>
+
+        <h2 class="chapter-title">
+            my dreams
+        </h2>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     THE FUTURE
+===================================================== -->
+
+<section class="chapter future" id="future">
+
+    <div class="chapter-content">
+
+        <div class="future-small">
+            CHAPTER 08
+        </div>
+
+        <h2 class="future-title">
+            the<br>
+            future.
+        </h2>
 
     </div>
 
@@ -775,15 +1026,88 @@ footer {
 
 <footer>
 
-    <span>
-        THINGS I'VE BUILT
-    </span>
-
-    <span>
-        © 2026
-    </span>
+    THE STORY CONTINUES
 
 </footer>
+
+
+<script>
+
+/* =========================================================
+   CHAPTER INDICATOR
+========================================================= */
+
+const chapters = document.querySelectorAll(".chapter");
+
+const dots = document.querySelectorAll(".chapter-dot");
+
+const observer = new IntersectionObserver(
+
+    entries => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+                const index =
+                    Array.from(chapters)
+                    .indexOf(entry.target);
+
+                dots.forEach(dot =>
+                    dot.classList.remove("active")
+                );
+
+                if (dots[index]) {
+
+                    dots[index]
+                        .classList.add("active");
+
+                }
+
+            }
+
+        });
+
+    },
+
+    {
+        threshold: 0.55
+    }
+
+);
+
+chapters.forEach(chapter => {
+
+    observer.observe(chapter);
+
+});
+
+
+/* =========================================================
+   SUBTLE PARALLAX
+========================================================= */
+
+window.addEventListener("scroll", () => {
+
+    const numbers =
+        document.querySelectorAll(".chapter-number");
+
+    numbers.forEach(number => {
+
+        const rect =
+            number.parentElement.getBoundingClientRect();
+
+        const movement =
+            rect.top * -0.05;
+
+        number.style.transform =
+            `translateY(${movement}px)`;
+
+    });
+
+});
+
+</script>
 
 
 </body>
