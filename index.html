@@ -116,6 +116,7 @@ body {
     0% {
         opacity: 0;
         transform: scale(.82);
+
         filter:
             blur(12px)
             drop-shadow(0 0 0 transparent);
@@ -124,6 +125,7 @@ body {
     100% {
         opacity: 1;
         transform: scale(1);
+
         filter:
             blur(0)
             drop-shadow(0 0 30px rgba(255,255,255,.22));
@@ -202,74 +204,88 @@ body {
 }
 
 /* =========================
-   TOP BAR
+   TOP HEADER
+   WHITE + CLEAR LOGO
 ========================= */
 
 .topbar {
     width: 100%;
 
-    padding:
-        28px 45px;
+    min-height: 110px;
+
+    padding: 15px 45px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    border-bottom:
-        1px solid var(--line);
+    border-bottom: 1px solid #dedede;
 
-    background:
-        rgba(5,5,5,.72);
-
-    backdrop-filter: blur(20px);
+    background: #ffffff;
 
     position: relative;
     z-index: 50;
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.08);
 }
 
 .brand {
     display: flex;
     align-items: center;
 
-    gap: 18px;
+    gap: 20px;
 }
 
+/*
+   IMPORTANT:
+   The logo is white on the loading screen.
+   Here we invert it so it becomes dark on
+   the white header and stays clearly visible.
+*/
+
 .brand img {
-    width: 75px;
-    height: 75px;
+    width: 90px;
+    height: 80px;
 
     object-fit: contain;
 
     display: block;
 
     filter:
-        drop-shadow(
-            0 0 12px
-            rgba(255,255,255,.10)
-        );
+        brightness(0)
+        contrast(1.15);
+
+    opacity: 1;
 }
 
 .brand-text {
     display: flex;
     flex-direction: column;
 
-    gap: 5px;
+    gap: 6px;
 }
 
 .brand-name {
     font-family: "DM Mono", monospace;
 
-    font-size: 10px;
+    font-size: 11px;
+
     letter-spacing: 4px;
+
+    color: #050505;
+
+    font-weight: 500;
 }
 
 .brand-sub {
     font-family: "DM Mono", monospace;
 
     font-size: 7px;
+
     letter-spacing: 2px;
 
-    color: #555;
+    color: #666666;
 }
 
 .top-status {
@@ -284,20 +300,20 @@ body {
 
     letter-spacing: 2px;
 
-    color: #666;
+    color: #555555;
 }
 
 .status-dot {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
 
-    background: white;
+    background: #050505;
 
     border-radius: 50%;
 
     box-shadow:
-        0 0 12px
-        rgba(255,255,255,.7);
+        0 0 10px
+        rgba(0,0,0,.3);
 
     animation: pulse 2s infinite;
 }
@@ -379,7 +395,7 @@ body {
 }
 
 /* =========================
-   INTRO MESSAGE
+   INTRO
 ========================= */
 
 .intro-message {
@@ -408,7 +424,7 @@ body {
 }
 
 /* =========================
-   ARCHIVE CARD
+   ARCHIVE CARDS
 ========================= */
 
 .archive-card {
@@ -565,7 +581,7 @@ body {
 }
 
 /* =========================
-   FEATURE CARD
+   FEATURE
 ========================= */
 
 .feature {
@@ -620,7 +636,7 @@ body {
 }
 
 /* =========================
-   MODAL
+   MODALS
 ========================= */
 
 .modal {
@@ -988,12 +1004,14 @@ body {
 
     .topbar {
         padding:
-            20px;
+            15px 20px;
+
+        min-height: 90px;
     }
 
     .brand img {
-        width: 58px;
-        height: 58px;
+        width: 70px;
+        height: 65px;
     }
 
     .top-status {
@@ -1055,7 +1073,22 @@ body {
     }
 
     .brand-text {
-        display: none;
+        display: flex;
+    }
+
+    .brand-name {
+        font-size: 8px;
+        letter-spacing: 2px;
+    }
+
+    .brand-sub {
+        font-size: 6px;
+        letter-spacing: 1px;
+    }
+
+    .brand img {
+        width: 62px;
+        height: 60px;
     }
 
     .heading {
@@ -1106,7 +1139,7 @@ body {
 <body>
 
 <!-- =========================
-     LOADER
+     LOADING SCREEN
 ========================= -->
 
 <div class="loader">
@@ -1126,8 +1159,9 @@ body {
 <div class="grid-bg"></div>
 <div class="glow"></div>
 
+
 <!-- =========================
-     TOP BAR
+     WHITE TOP HEADER
 ========================= -->
 
 <header class="topbar">
@@ -1165,7 +1199,7 @@ body {
 
 
 <!-- =========================
-     MAIN ARCHIVE
+     MAIN
 ========================= -->
 
 <main class="main">
@@ -1208,12 +1242,10 @@ body {
 
 
     <!-- =========================
-         ARCHIVE CARDS
+         ARCHIVE
     ========================= -->
 
     <section class="archive">
-
-        <!-- 01 -->
 
         <article
             class="archive-card wide"
@@ -1253,8 +1285,6 @@ body {
         </article>
 
 
-        <!-- 02 -->
-
         <article
             class="archive-card"
             onclick="openModal('story')"
@@ -1292,8 +1322,6 @@ body {
 
         </article>
 
-
-        <!-- 03 -->
 
         <article
             class="archive-card"
@@ -1333,8 +1361,6 @@ body {
         </article>
 
 
-        <!-- 04 -->
-
         <article
             class="archive-card"
             onclick="openModal('built')"
@@ -1372,8 +1398,6 @@ body {
 
         </article>
 
-
-        <!-- 05 -->
 
         <article
             class="archive-card"
@@ -1413,8 +1437,6 @@ body {
         </article>
 
 
-        <!-- 06 -->
-
         <article
             class="archive-card"
             onclick="openModal('mind')"
@@ -1452,8 +1474,6 @@ body {
 
         </article>
 
-
-        <!-- 07 -->
 
         <article
             class="archive-card"
@@ -1493,8 +1513,6 @@ body {
         </article>
 
 
-        <!-- 08 -->
-
         <article
             class="archive-card"
             onclick="openModal('create')"
@@ -1533,8 +1551,6 @@ body {
         </article>
 
 
-        <!-- 09 -->
-
         <article
             class="archive-card feature"
             onclick="openModal('future')"
@@ -1553,11 +1569,9 @@ body {
             </div>
 
             <div>
-
                 <div class="card-tag">
                     STILL BEING WRITTEN
                 </div>
-
             </div>
 
             <div>
@@ -1590,7 +1604,7 @@ body {
 
 
 <!-- ==================================================
-     MODAL — MY BEGINNING
+     MY BEGINNING
 ================================================== -->
 
 <div class="modal" id="beginning">
@@ -1615,9 +1629,7 @@ body {
             <button
                 class="close"
                 onclick="closeModal()"
-            >
-                ×
-            </button>
+            >×</button>
 
         </div>
 
@@ -1710,26 +1722,13 @@ body {
 
         </div>
 
-
-        <div class="modal-bottom">
-
-            <span class="back-text">
-                ARCHIVE / 01
-            </span>
-
-            <span class="back-text">
-                CLOSE ×
-            </span>
-
-        </div>
-
     </div>
 
 </div>
 
 
 <!-- ==================================================
-     MODAL — MY STORY
+     MY STORY
 ================================================== -->
 
 <div class="modal" id="story">
@@ -1754,9 +1753,7 @@ body {
             <button
                 class="close"
                 onclick="closeModal()"
-            >
-                ×
-            </button>
+            >×</button>
 
         </div>
 
@@ -1890,7 +1887,7 @@ body {
 
 
 <!-- ==================================================
-     MODAL — JOURNEY
+     MY JOURNEY
 ================================================== -->
 
 <div class="modal" id="journey">
@@ -1915,9 +1912,7 @@ body {
             <button
                 class="close"
                 onclick="closeModal()"
-            >
-                ×
-            </button>
+            >×</button>
 
         </div>
 
@@ -2030,7 +2025,7 @@ body {
 
 
 <!-- ==================================================
-     MODAL — BUILT
+     THINGS I'VE BUILT
 ================================================== -->
 
 <div class="modal" id="built">
@@ -2055,16 +2050,12 @@ body {
             <button
                 class="close"
                 onclick="closeModal()"
-            >
-                ×
-            </button>
+            >×</button>
 
         </div>
 
 
         <div class="project-grid">
-
-            <!-- SUMS -->
 
             <div class="project-card">
 
@@ -2097,8 +2088,6 @@ body {
 
             </div>
 
-
-            <!-- UNI CIRCLE -->
 
             <div class="project-card">
 
@@ -2134,7 +2123,7 @@ body {
 
 
 <!-- ==================================================
-     MODAL — BUILDING
+     I'M BUILDING
 ================================================== -->
 
 <div class="modal" id="building">
@@ -2159,9 +2148,7 @@ body {
             <button
                 class="close"
                 onclick="closeModal()"
-            >
-                ×
-            </button>
+            >×</button>
 
         </div>
 
@@ -2233,7 +2220,7 @@ body {
 
 
 <!-- ==================================================
-     MODAL — MIND
+     MY MIND
 ================================================== -->
 
 <div class="modal" id="mind">
@@ -2258,9 +2245,7 @@ body {
             <button
                 class="close"
                 onclick="closeModal()"
-            >
-                ×
-            </button>
+            >×</button>
 
         </div>
 
@@ -2353,7 +2338,7 @@ body {
 
 
 <!-- ==================================================
-     MODAL — DREAMS
+     MY DREAMS
 ================================================== -->
 
 <div class="modal" id="dreams">
@@ -2378,9 +2363,7 @@ body {
             <button
                 class="close"
                 onclick="closeModal()"
-            >
-                ×
-            </button>
+            >×</button>
 
         </div>
 
@@ -2450,7 +2433,7 @@ body {
 
 
 <!-- ==================================================
-     MODAL — THINGS I WANT
+     THINGS I WANT
 ================================================== -->
 
 <div class="modal" id="create">
@@ -2475,9 +2458,7 @@ body {
             <button
                 class="close"
                 onclick="closeModal()"
-            >
-                ×
-            </button>
+            >×</button>
 
         </div>
 
@@ -2579,7 +2560,7 @@ body {
 
 
 <!-- ==================================================
-     MODAL — FUTURE
+     THE FUTURE
 ================================================== -->
 
 <div class="modal" id="future">
@@ -2604,9 +2585,7 @@ body {
             <button
                 class="close"
                 onclick="closeModal()"
-            >
-                ×
-            </button>
+            >×</button>
 
         </div>
 
@@ -2752,7 +2731,7 @@ document.addEventListener(
 
 
 /* =========================
-   CLICK OUTSIDE
+   CLICK OUTSIDE MODAL
 ========================= */
 
 document
@@ -2763,9 +2742,7 @@ document
             "click",
             function(event) {
 
-                if (
-                    event.target === modal
-                ) {
+                if (event.target === modal) {
                     closeModal();
                 }
 
@@ -2776,7 +2753,7 @@ document
 
 
 /* =========================
-   MOVING BACKGROUND GLOW
+   MOVING BACKGROUND
 ========================= */
 
 document.addEventListener(
@@ -2811,8 +2788,7 @@ document.addEventListener(
 
 
 /* =========================
-   REMOVE LOADER FROM TAB
-   AFTER ANIMATION
+   LOADER
 ========================= */
 
 setTimeout(
