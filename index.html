@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Things I've Built</title>
+
+<style>
+
+/* =========================================================
+   BASE
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f5f3ef;
+    color: #171717;
+    font-family: Georgia, "Times New Roman", serif;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+
+    background: rgba(245,243,239,0.88);
+    backdrop-filter: blur(15px);
+}
+
+.logo {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    font-style: italic;
+    letter-spacing: -1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #171717;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    transition: opacity .3s ease;
+}
+
+.nav-links a:hover {
+    opacity: .5;
+}
+
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+section {
+    width: 100%;
+    position: relative;
+}
+
+.section-label {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: .55;
+}
+
+.section-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: normal;
+    font-style: italic;
+    font-size: clamp(45px, 8vw, 100px);
+    line-height: .95;
+    letter-spacing: -4px;
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+#home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 7%;
+}
+
+.home-content {
+    max-width: 1100px;
+}
+
+.home-small {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    margin-bottom: 35px;
+    opacity: .5;
+}
+
+.home-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: normal;
+    font-style: italic;
+    font-size: clamp(60px, 12vw, 170px);
+    line-height: .82;
+    letter-spacing: -8px;
+}
+
+.home-title span {
+    display: block;
+}
+
+.home-subtitle {
+    margin-top: 45px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    opacity: .55;
+}
+
+.home-button {
+    display: inline-block;
+    margin-top: 45px;
+    padding: 14px 30px;
+    border: 1px solid #171717;
+    color: #171717;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    transition: .3s ease;
+}
+
+.home-button:hover {
+    background: #171717;
+    color: #f5f3ef;
+}
+
+
+/* =========================================================
+   PROJECTS
+========================================================= */
+
+#projects {
+    min-height: 100vh;
+    padding: 140px 7%;
+}
+
+.projects-heading {
+    margin-bottom: 80px;
+}
+
+.projects-heading .section-title {
+    max-width: 800px;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 70px 35px;
+}
+
+
+/* =========================================================
+   PROJECT CARD
+========================================================= */
+
+.project-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.project-image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+
+    background: #e8e5df;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    transition: transform .6s cubic-bezier(.2,.8,.2,1);
+}
+
+.project-card:hover .project-image {
+    transform: scale(.98);
+}
+
+.project-image span {
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    opacity: .3;
+}
+
+.project-details {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.project-name {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 28px;
+    letter-spacing: -1px;
+}
+
+.project-category {
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    opacity: .5;
+    padding-top: 8px;
+}
+
+
+/* =========================================================
+   FEATURED PROJECT
+========================================================= */
+
+.featured {
+    grid-column: 1 / -1;
+}
+
+.featured .project-image {
+    aspect-ratio: 21 / 9;
+}
+
+.featured .project-name {
+    font-size: clamp(35px, 5vw, 60px);
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+#about {
+    min-height: 100vh;
+    padding: 150px 7%;
+    display: flex;
+    align-items: center;
+}
+
+.about-content {
+    width: 100%;
+}
+
+.about-text {
+    max-width: 900px;
+    margin-top: 60px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(30px, 5vw, 65px);
+    line-height: 1.08;
+    font-style: italic;
+    font-weight: normal;
+    letter-spacing: -2px;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+#contact {
+    min-height: 90vh;
+    padding: 150px 7%;
+    display: flex;
+    align-items: center;
+}
+
+.contact-content {
+    width: 100%;
+}
+
+.contact-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(55px, 11vw, 150px);
+    line-height: .85;
+    font-style: italic;
+    font-weight: normal;
+    letter-spacing: -7px;
+}
+
+.contact-link {
+    display: inline-block;
+    margin-top: 50px;
+    color: #171717;
+    text-decoration: none;
+    border-bottom: 1px solid #171717;
+    padding-bottom: 8px;
+
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding: 30px 7%;
+    border-top: 1px solid rgba(0,0,0,.12);
+
+    display: flex;
+    justify-content: space-between;
+
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    opacity: .45;
+}
+
+
+/* =========================================================
+   TEXT REVEAL ANIMATION
+========================================================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    animation: revealText 1.2s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+.delay-1 {
+    animation-delay: .2s;
+}
+
+.delay-2 {
+    animation-delay: .4s;
+}
+
+.delay-3 {
+    animation-delay: .6s;
+}
+
+@keyframes revealText {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 20px 5%;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .nav-links {
+        gap: 14px;
+    }
+
+    .nav-links a {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    #home {
+        padding: 100px 6%;
+    }
+
+    .home-title {
+        font-size: 62px;
+        letter-spacing: -4px;
+    }
+
+    .home-subtitle {
+        line-height: 1.8;
+    }
+
+    #projects {
+        padding: 110px 6%;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .featured {
+        grid-column: auto;
+    }
+
+    .featured .project-image {
+        aspect-ratio: 16 / 10;
+    }
+
+    .project-name {
+        font-size: 24px;
+    }
+
+    #about,
+    #contact {
+        padding: 110px 6%;
+    }
+
+    .about-text {
+        font-size: 34px;
+    }
+
+    .contact-title {
+        font-size: 65px;
+        letter-spacing: -4px;
+    }
+
+    footer {
+        padding: 25px 6%;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        things i've built
+    </div>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="#home">HOME</a>
+        </li>
+
+        <li>
+            <a href="#projects">PROJECTS</a>
+        </li>
+
+        <li>
+            <a href="#about">ABOUT</a>
+        </li>
+
+        <li>
+            <a href="#contact">CONTACT</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+
+<!-- =====================================================
+     HOME
+===================================================== -->
+
+<section id="home">
+
+    <div class="home-content">
+
+        <div class="home-small reveal">
+            A COLLECTION OF MY WORK
+        </div>
+
+        <h1 class="home-title reveal delay-1">
+
+            <span>Things</span>
+            <span>I've Built.</span>
+
+        </h1>
+
+        <div class="home-subtitle reveal delay-2">
+            websites · apps · ideas · experiments
+        </div>
+
+        <a
+            href="#projects"
+            class="home-button reveal delay-3"
+        >
+            EXPLORE
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
+
+<section id="projects">
+
+    <div class="projects-heading">
+
+        <div class="section-label">
+            01 — PROJECTS
+        </div>
+
+        <h2 class="section-title">
+            Things I've<br>
+            made along<br>
+            the way.
+        </h2>
+
+    </div>
+
+
+    <div class="projects-grid">
+
+
+        <!-- FEATURED PROJECT -->
+
+        <div class="project-card featured">
+
+            <div class="project-image">
+
+                <span>
+                    PROJECT IMAGE
+                </span>
+
+            </div>
+
+            <div class="project-details">
+
+                <div class="project-name">
+                    Project Name
+                </div>
+
+                <div class="project-category">
+                    FEATURED
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PROJECT -->
+
+        <div class="project-card">
+
+            <div class="project-image">
+
+                <span>
+                    PROJECT IMAGE
+                </span>
+
+            </div>
+
+            <div class="project-details">
+
+                <div class="project-name">
+                    Project Name
+                </div>
+
+                <div class="project-category">
+                    WEBSITE
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PROJECT -->
+
+        <div class="project-card">
+
+            <div class="project-image">
+
+                <span>
+                    PROJECT IMAGE
+                </span>
+
+            </div>
+
+            <div class="project-details">
+
+                <div class="project-name">
+                    Project Name
+                </div>
+
+                <div class="project-category">
+                    APP
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PROJECT -->
+
+        <div class="project-card">
+
+            <div class="project-image">
+
+                <span>
+                    PROJECT IMAGE
+                </span>
+
+            </div>
+
+            <div class="project-details">
+
+                <div class="project-name">
+                    Project Name
+                </div>
+
+                <div class="project-category">
+                    AI
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PROJECT -->
+
+        <div class="project-card">
+
+            <div class="project-image">
+
+                <span>
+                    PROJECT IMAGE
+                </span>
+
+            </div>
+
+            <div class="project-details">
+
+                <div class="project-name">
+                    Project Name
+                </div>
+
+                <div class="project-category">
+                    EXPERIMENT
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section id="about">
+
+    <div class="about-content">
+
+        <div class="section-label">
+            02 — ABOUT
+        </div>
+
+        <h2 class="section-title">
+            About
+        </h2>
+
+        <div class="about-text">
+
+            This space will tell the story behind
+            the things I create.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section id="contact">
+
+    <div class="contact-content">
+
+        <div class="section-label">
+            03 — CONTACT
+        </div>
+
+        <div class="contact-title">
+            Let's<br>
+            talk.
+        </div>
+
+        <a
+            href="#"
+            class="contact-link"
+        >
+            CONTACT ME
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <span>
+        THINGS I'VE BUILT
+    </span>
+
+    <span>
+        © 2026
+    </span>
+
+</footer>
+
+
+</body>
+</html>
