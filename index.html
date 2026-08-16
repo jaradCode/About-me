@@ -12,13 +12,9 @@
 :root {
     --black: #050505;
     --panel: #0c0c0c;
-    --panel2: #111111;
     --white: #ffffff;
-    --soft: #e4e4e4;
     --gray: #a2a2a2;
-    --darkgray: #666;
     --line: rgba(255,255,255,.12);
-    --accent: #c8d0da;
 }
 
 * {
@@ -112,11 +108,9 @@ body {
 }
 
 @keyframes logoIn {
-
     0% {
         opacity: 0;
         transform: scale(.82);
-
         filter:
             blur(12px)
             drop-shadow(0 0 0 transparent);
@@ -125,7 +119,6 @@ body {
     100% {
         opacity: 1;
         transform: scale(1);
-
         filter:
             blur(0)
             drop-shadow(0 0 30px rgba(255,255,255,.22));
@@ -133,7 +126,6 @@ body {
 }
 
 @keyframes loaderOut {
-
     0% {
         opacity: 1;
         visibility: visible;
@@ -210,13 +202,12 @@ body {
 .topbar {
     width: 100%;
 
-    min-height: 110px;
+    min-height: 125px;
 
     padding: 15px 45px;
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
 
     border-bottom: 1px solid rgba(255,255,255,.12);
 
@@ -231,20 +222,21 @@ body {
 
 .brand {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 
-    gap: 20px;
+    align-items: flex-start;
+
+    gap: 6px;
 }
 
 .brand img {
-    width: 90px;
-    height: 80px;
+    width: 95px;
+    height: 82px;
 
     object-fit: contain;
 
     display: block;
 
-    /* WHITE + CLEAR LOGO */
     filter:
         brightness(0)
         invert(1)
@@ -253,74 +245,14 @@ body {
     opacity: 1;
 }
 
-.brand-text {
-    display: flex;
-    flex-direction: column;
-
-    gap: 6px;
-}
-
-.brand-name {
-    font-family: "DM Mono", monospace;
-
-    font-size: 11px;
-
-    letter-spacing: 4px;
-
-    color: #ffffff;
-
-    font-weight: 500;
-}
-
 .brand-sub {
-    font-family: "DM Mono", monospace;
-
-    font-size: 7px;
-
-    letter-spacing: 2px;
-
-    color: #c7c7c7;
-}
-
-.top-status {
-    display: flex;
-    align-items: center;
-
-    gap: 9px;
-
     font-family: "DM Mono", monospace;
 
     font-size: 8px;
 
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 
-    color: #c7c7c7;
-}
-
-.status-dot {
-    width: 6px;
-    height: 6px;
-
-    background: #ffffff;
-
-    border-radius: 50%;
-
-    box-shadow:
-        0 0 10px
-        rgba(255,255,255,.35);
-
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-
-    0%,100% {
-        opacity: .45;
-    }
-
-    50% {
-        opacity: 1;
-    }
+    color: #d8d8d8;
 }
 
 /* =========================
@@ -388,10 +320,6 @@ body {
     color: #a0a0a0;
 }
 
-/* =========================
-   INTRO
-========================= */
-
 .intro-message {
     max-width: 620px;
 
@@ -416,10 +344,6 @@ body {
 
     gap: 16px;
 }
-
-/* =========================
-   ARCHIVE CARDS
-========================= */
 
 .archive-card {
     position: relative;
@@ -659,7 +583,6 @@ body {
 }
 
 @keyframes modalIn {
-
     from {
         opacity: 0;
     }
@@ -829,7 +752,7 @@ body {
 
     letter-spacing: 3px;
 
-    color: var(--accent);
+    color: #c8d0da;
 
     margin-bottom: 35px;
 }
@@ -973,16 +896,12 @@ body {
         padding:
             15px 20px;
 
-        min-height: 90px;
+        min-height: 105px;
     }
 
     .brand img {
-        width: 70px;
-        height: 65px;
-    }
-
-    .top-status {
-        display: none;
+        width: 78px;
+        height: 68px;
     }
 
     .main {
@@ -1039,19 +958,14 @@ body {
         height: 250px;
     }
 
-    .brand-name {
-        font-size: 8px;
-        letter-spacing: 2px;
+    .brand img {
+        width: 70px;
+        height: 62px;
     }
 
     .brand-sub {
         font-size: 6px;
-        letter-spacing: 1px;
-    }
-
-    .brand img {
-        width: 62px;
-        height: 60px;
+        letter-spacing: 2px;
     }
 
     .heading {
@@ -1131,30 +1045,16 @@ body {
 
     <div class="brand">
 
+        <!-- THE ONLY VII / XXV LOGO -->
+
         <img
             src="logo.png"
             alt="VII / XXV"
         >
 
-        <div class="brand-text">
-
-            <div class="brand-name">
-                VII / XXV
-            </div>
-
-            <div class="brand-sub">
-                BEFORE THE NAME
-            </div>
-
+        <div class="brand-sub">
+            BEFORE THE NAME
         </div>
-
-    </div>
-
-    <div class="top-status">
-
-        <span class="status-dot"></span>
-
-        STILL BECOMING
 
     </div>
 
@@ -1171,8 +1071,10 @@ body {
 
         <div>
 
+            <!-- PERSONAL ARCHIVE / 001 REMOVED -->
+
             <div class="heading-label">
-                PERSONAL ARCHIVE / 001
+                PERSONAL ARCHIVE
             </div>
 
             <h1 class="heading">
@@ -1186,8 +1088,7 @@ body {
 
             WRITTEN<br>
             16 AUGUST 2026<br>
-            17:31<br>
-            PORT ST JOHNS, EASTERN CAPE
+            17:31
 
         </div>
 
