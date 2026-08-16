@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BEFORE THE NAME — Ntsikelelo</title>
+<title>VII / XXV — Ntsikelelo</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600&display=swap');
@@ -14,11 +14,11 @@
     --panel: #0c0c0c;
     --panel2: #111111;
     --white: #ffffff;
-    --soft: #d5d5d5;
-    --gray: #777;
-    --darkgray: #3a3a3a;
-    --line: rgba(255,255,255,.10);
-    --accent: #aeb9c8;
+    --soft: #e4e4e4;
+    --gray: #a2a2a2;
+    --darkgray: #666;
+    --line: rgba(255,255,255,.12);
+    --accent: #c8d0da;
 }
 
 * {
@@ -108,7 +108,7 @@ body {
     font-size: 8px;
     letter-spacing: 5px;
 
-    color: rgba(255,255,255,.45);
+    color: rgba(255,255,255,.70);
 }
 
 @keyframes logoIn {
@@ -205,7 +205,6 @@ body {
 
 /* =========================
    TOP HEADER
-   WHITE + CLEAR LOGO
 ========================= */
 
 .topbar {
@@ -219,15 +218,15 @@ body {
     align-items: center;
     justify-content: space-between;
 
-    border-bottom: 1px solid #dedede;
+    border-bottom: 1px solid rgba(255,255,255,.12);
 
-    background: #ffffff;
+    background: #050505;
 
     position: relative;
     z-index: 50;
 
     box-shadow:
-        0 5px 25px rgba(0,0,0,.08);
+        0 5px 25px rgba(0,0,0,.30);
 }
 
 .brand {
@@ -237,13 +236,6 @@ body {
     gap: 20px;
 }
 
-/*
-   IMPORTANT:
-   The logo is white on the loading screen.
-   Here we invert it so it becomes dark on
-   the white header and stays clearly visible.
-*/
-
 .brand img {
     width: 90px;
     height: 80px;
@@ -252,8 +244,10 @@ body {
 
     display: block;
 
+    /* WHITE + CLEAR LOGO */
     filter:
         brightness(0)
+        invert(1)
         contrast(1.15);
 
     opacity: 1;
@@ -273,7 +267,7 @@ body {
 
     letter-spacing: 4px;
 
-    color: #050505;
+    color: #ffffff;
 
     font-weight: 500;
 }
@@ -285,7 +279,7 @@ body {
 
     letter-spacing: 2px;
 
-    color: #666666;
+    color: #c7c7c7;
 }
 
 .top-status {
@@ -300,20 +294,20 @@ body {
 
     letter-spacing: 2px;
 
-    color: #555555;
+    color: #c7c7c7;
 }
 
 .status-dot {
     width: 6px;
     height: 6px;
 
-    background: #050505;
+    background: #ffffff;
 
     border-radius: 50%;
 
     box-shadow:
         0 0 10px
-        rgba(0,0,0,.3);
+        rgba(255,255,255,.35);
 
     animation: pulse 2s infinite;
 }
@@ -321,7 +315,7 @@ body {
 @keyframes pulse {
 
     0%,100% {
-        opacity: .3;
+        opacity: .45;
     }
 
     50% {
@@ -360,7 +354,7 @@ body {
 
     letter-spacing: 5px;
 
-    color: #555;
+    color: #a0a0a0;
 
     margin-bottom: 20px;
 }
@@ -377,7 +371,7 @@ body {
 }
 
 .heading span {
-    color: #555;
+    color: #777;
 }
 
 .archive-date {
@@ -391,7 +385,7 @@ body {
 
     letter-spacing: 2px;
 
-    color: #555;
+    color: #a0a0a0;
 }
 
 /* =========================
@@ -401,7 +395,7 @@ body {
 .intro-message {
     max-width: 620px;
 
-    color: #777;
+    color: #a5a5a5;
 
     font-size: 14px;
 
@@ -511,7 +505,7 @@ body {
 
     letter-spacing: 3px;
 
-    color: #555;
+    color: #9b9b9b;
 }
 
 .card-arrow {
@@ -519,7 +513,7 @@ body {
 
     font-size: 13px;
 
-    color: #555;
+    color: #9b9b9b;
 
     transition: .3s;
 }
@@ -552,7 +546,7 @@ body {
 .card-description {
     max-width: 470px;
 
-    color: #707070;
+    color: #9a9a9a;
 
     font-size: 12px;
 
@@ -569,7 +563,7 @@ body {
 
     border:
         1px solid
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.12);
 
     font-family: "DM Mono", monospace;
 
@@ -577,7 +571,7 @@ body {
 
     letter-spacing: 2px;
 
-    color: #555;
+    color: #a0a0a0;
 }
 
 /* =========================
@@ -606,7 +600,7 @@ body {
 }
 
 .feature-title span {
-    color: #555;
+    color: #777;
 }
 
 /* =========================
@@ -632,7 +626,7 @@ body {
 
     letter-spacing: 3px;
 
-    color: #444;
+    color: #888;
 }
 
 /* =========================
@@ -707,7 +701,7 @@ body {
 
     letter-spacing: 4px;
 
-    color: #555;
+    color: #999;
 
     margin-bottom: 18px;
 }
@@ -729,7 +723,7 @@ body {
 
     border:
         1px solid
-        rgba(255,255,255,.15);
+        rgba(255,255,255,.20);
 
     background: transparent;
 
@@ -764,7 +758,7 @@ body {
 
     border:
         1px solid
-        rgba(255,255,255,.09);
+        rgba(255,255,255,.12);
 
     background:
         rgba(255,255,255,.025);
@@ -781,7 +775,7 @@ body {
 
     letter-spacing: 3px;
 
-    color: #555;
+    color: #a0a0a0;
 
     margin-bottom: 25px;
 }
@@ -795,7 +789,7 @@ body {
 }
 
 .info-box p {
-    color: #858585;
+    color: #9a9a9a;
 
     font-size: 14px;
 
@@ -822,7 +816,7 @@ body {
 
     border:
         1px solid
-        rgba(255,255,255,.09);
+        rgba(255,255,255,.12);
 
     background:
         rgba(255,255,255,.025);
@@ -849,7 +843,7 @@ body {
 }
 
 .timeline-box p {
-    color: #777;
+    color: #999;
 
     font-size: 13px;
 
@@ -876,7 +870,7 @@ body {
 
     border:
         1px solid
-        rgba(255,255,255,.10);
+        rgba(255,255,255,.12);
 
     background:
         #0b0b0b;
@@ -921,6 +915,8 @@ body {
     letter-spacing: 5px;
 
     font-size: 11px;
+
+    color: #cfcfcf;
 }
 
 .project-details {
@@ -936,7 +932,7 @@ body {
 }
 
 .project-details p {
-    color: #777;
+    color: #999;
 
     font-size: 13px;
 
@@ -948,7 +944,7 @@ body {
 
     margin-top: 18px;
 
-    color: #aaa;
+    color: #b5b5b5;
 
     font-family: "DM Mono", monospace;
 
@@ -965,35 +961,6 @@ body {
     color: white;
 
     letter-spacing: 5px;
-}
-
-/* =========================
-   MODAL BOTTOM
-========================= */
-
-.modal-bottom {
-    margin-top: 45px;
-
-    display: flex;
-
-    justify-content: space-between;
-    align-items: center;
-
-    border-top:
-        1px solid
-        var(--line);
-
-    padding-top: 25px;
-}
-
-.back-text {
-    font-family: "DM Mono", monospace;
-
-    font-size: 7px;
-
-    letter-spacing: 3px;
-
-    color: #555;
 }
 
 /* =========================
@@ -1072,10 +1039,6 @@ body {
         height: 250px;
     }
 
-    .brand-text {
-        display: flex;
-    }
-
     .brand-name {
         font-size: 8px;
         letter-spacing: 2px;
@@ -1146,7 +1109,7 @@ body {
 
     <img
         src="logo.png"
-        alt="Before The Name"
+        alt="VII / XXV"
         class="loader-logo"
     >
 
@@ -1161,7 +1124,7 @@ body {
 
 
 <!-- =========================
-     WHITE TOP HEADER
+     TOP HEADER
 ========================= -->
 
 <header class="topbar">
@@ -1170,17 +1133,17 @@ body {
 
         <img
             src="logo.png"
-            alt="Before The Name"
+            alt="VII / XXV"
         >
 
         <div class="brand-text">
 
             <div class="brand-name">
-                BEFORE THE NAME
+                VII / XXV
             </div>
 
             <div class="brand-sub">
-                A DOCUMENTARY OF ONE LIFE
+                BEFORE THE NAME
             </div>
 
         </div>
@@ -1242,7 +1205,7 @@ body {
 
 
     <!-- =========================
-         ARCHIVE
+         ARCHIVE GRID
     ========================= -->
 
     <section class="archive">
@@ -1591,7 +1554,7 @@ body {
     <footer class="footer">
 
         <span>
-            BEFORE THE NAME / ARCHIVE 001
+            VII / XXV / ARCHIVE 001
         </span>
 
         <span>
@@ -1603,9 +1566,9 @@ body {
 </main>
 
 
-<!-- ==================================================
+<!-- =========================
      MY BEGINNING
-================================================== -->
+========================= -->
 
 <div class="modal" id="beginning">
 
@@ -1727,9 +1690,9 @@ body {
 </div>
 
 
-<!-- ==================================================
+<!-- =========================
      MY STORY
-================================================== -->
+========================= -->
 
 <div class="modal" id="story">
 
@@ -1886,9 +1849,9 @@ body {
 </div>
 
 
-<!-- ==================================================
+<!-- =========================
      MY JOURNEY
-================================================== -->
+========================= -->
 
 <div class="modal" id="journey">
 
@@ -2024,9 +1987,9 @@ body {
 </div>
 
 
-<!-- ==================================================
+<!-- =========================
      THINGS I'VE BUILT
-================================================== -->
+========================= -->
 
 <div class="modal" id="built">
 
@@ -2122,9 +2085,9 @@ body {
 </div>
 
 
-<!-- ==================================================
+<!-- =========================
      I'M BUILDING
-================================================== -->
+========================= -->
 
 <div class="modal" id="building">
 
@@ -2219,9 +2182,9 @@ body {
 </div>
 
 
-<!-- ==================================================
+<!-- =========================
      MY MIND
-================================================== -->
+========================= -->
 
 <div class="modal" id="mind">
 
@@ -2337,9 +2300,9 @@ body {
 </div>
 
 
-<!-- ==================================================
+<!-- =========================
      MY DREAMS
-================================================== -->
+========================= -->
 
 <div class="modal" id="dreams">
 
@@ -2432,9 +2395,9 @@ body {
 </div>
 
 
-<!-- ==================================================
+<!-- =========================
      THINGS I WANT
-================================================== -->
+========================= -->
 
 <div class="modal" id="create">
 
@@ -2559,9 +2522,9 @@ body {
 </div>
 
 
-<!-- ==================================================
+<!-- =========================
      THE FUTURE
-================================================== -->
+========================= -->
 
 <div class="modal" id="future">
 
